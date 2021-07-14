@@ -141,7 +141,7 @@ feedConfig = FeedConfiguration
     , feedDescription = "IM, NTU"
     , feedAuthorName  = "Shin-Cheng Mu"
     , feedAuthorEmail = "scm@iis.sinica.edu.tw"
-    , feedRoot        = "https://github.com/hahey/lanyon-hakyll"
+    , feedRoot        = "https://scmlab.github.io/guabao/"
     }
 
 --------------------------------------------------------------------------------
@@ -156,15 +156,15 @@ siteCtx =
     baseCtx `mappend`
     constField "site_description"
                "Guabao" `mappend`
-    constField "site-url" "https://scmu.github.io/plfp/" `mappend`
+    constField "site-url" "https://scmlab.github.io/guabao/" `mappend`
     constField "tagline" "Coding and Proving Hand in Hand" `mappend`
     constField "site-title" "Guabao" `mappend`
     constField "copy-year" "2021" `mappend`
-    constField "github-repo" "https://scmu.github.io/guabao" `mappend`
+    constField "github-repo" "https://scmlab.github.io/guabao/" `mappend`
     defaultContext
 
 baseCtx =
-    constField "baseurl" "https://scmu.github.io/plfp/"
+    constField "baseurl" "https://scmlab.github.io/guabao/"
                -- "http://localhost:8000"
 
 --------------------------------------------------------------------------------
