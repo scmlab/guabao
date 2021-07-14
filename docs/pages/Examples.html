@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <!---
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  -->
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Examples &middot; Guabao
+    
+  </title>
+
+  
+      
+  <link rel="canonical" href="https://scmu.github.io/plfp//pages/Examples.html">
+      
+  
+
+  <link rel="stylesheet" href="https://scmu.github.io/plfp//css/poole.css">
+  <link rel="stylesheet" href="https://scmu.github.io/plfp//css/syntax.css">
+  <link rel="stylesheet" href="https://scmu.github.io/plfp//css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!---
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ '/public/apple-touch-icon-precomposed.png' | absolute_url }}">
+  <link rel="shortcut icon" href="{{ '/public/favicon.ico' | absolute_url }}">
+  -->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://scmu.github.io/plfp//atom.xml">
+
+  <!--- deactivate google analytics
+  {% if site.google_analytics_id %}
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', '{{ site.google_analytics_id }}', 'auto');
+    ga('send', 'pageview');
+  </script>
+  {% endif %}
+  -->
+</head>
+
+
+  <body class="theme-base-0d">
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Guabao</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="https://scmu.github.io/plfp/">Home</a>
+
+    <!--- The code below dynamically generates a sidebar nav of the files in the folder /pages -->
+
+    
+      
+        <a class="sidebar-nav-item active" href="https://scmu.github.io/plfp//pages/Examples.html">Examples</a>
+      
+    
+      
+        <a class="sidebar-nav-item" href="https://scmu.github.io/plfp//pages/Language%20Reference.html">Language Reference</a>
+      
+    
+
+    <a class="sidebar-nav-item" href="https://scmu.github.io/guabao">GitHub project</a>
+
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2021. All rights reserved.
+    </p>
+    <p>
+        <img src="https://scmu.github.io/plfp//images/haskell-logo.png" class="logo" style="display: inline;" />
+        Site created with
+        <a href="https://jaspervdj.be/hakyll">Hakyll</a>.
+        <br>
+        Modified theme
+        <a href="https://github.com/hahey/lanyon-hakyll">lanyon-hakyll</a>
+        based on
+        <a href="https://lanyon.getpoole.com/">Lanyon</a>.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="https://scmu.github.io/plfp/" title="Home">Guabao</a>
+            <small>Coding and Proving Hand in Hand</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+          <div class="page">
+  <h1 class="page-title">Examples</h1>
+     <p>For a quick look of the language, here are some sample programs in Guabao’s variation of Guarded Command Language.</p>
+<h1 id="greatest-common-divisor">Greatest Common Divisor</h1>
+<p>The following program computes the greatest common divisor (<code>gcd</code>) of constants <code>A</code> and <code>B</code> and stores it in <code>r</code>, using what is perhaps one of the oldest algorithm.</p>
+<p>Note the <code>do</code> notation for while loops, the guarded commands, and that every loop must have an invariant (in this case <code>gcd x y = gcd A B ∧ x &gt; 0 ∧ y &gt; 0</code>) and a bound (in this case <code>x + y</code>).</p>
+<pre><code>con A, B : Int { A &gt; 0 ∧ B &gt; 0}
+var gcd : Int -&gt; Int -&gt; Int
+var x, y : Int
+
+x, y := A, B
+
+{ gcd x y = gcd A B ∧ x &gt; 0 ∧ y &gt; 0,
+  bnd: x + y }
+do x &lt; y -&gt; y := y - x
+ | x &gt; y -&gt; x := x - y
+od
+{ x = gcd A B }</code></pre>
+<h1 id="fast-multiplication">Fast Multiplication</h1>
+<p>Shown below is a <code>O(log B)</code> algorithm for computing <code>A * B</code>, using only addition, subtraction, multiplication and division by two, and parity test.</p>
+<pre><code>con A, B : Int { A ≥ 0 ∧ B ≥ 0 }
+con even, odd : Int -&gt; Bool
+var r, a, b : Int
+
+a, b, r := A, B, 0
+{ a * b + r = A * B ∧ 0 ≤ b, bnd: b }
+do b ≠ 0 -&gt;
+    if even b -&gt; a := a * 2
+                 b := b / 2
+     | odd b -&gt;  r := r + a
+                 b := b - 1
+    fi
+od
+{ r = A * B }</code></pre>
+<ul>
+<li><p>The purpose of the program is stated in the postcondition <code>{ r = A * B }</code>.</p></li>
+<li><p>Loop and conditional branches are respectively denoted by <code>do...od</code> and <code>if...fi</code>, both accepting guarded commands in their bodies. Notice the indent-aware syntax.</p></li>
+<li><p>The loop invariant is <code>a * b + r = A * B ∧ 0 ≤ b</code>, and the bound is <code>b</code>.</p></li>
+</ul>
+<p>Recall the screen shot:</p>
+<p><img src="../images/screenshot-v0.2.3.jpg" /></p>
+<ul>
+<li><p>The loop invariant is abbreviated to <code>INV</code> in the declaration block <code>{: ... :}</code> on line 5.</p></li>
+<li><p>As the program is being written, Guabao instantly parses the program and infers verification conditions yet to be proved to show that the program meets the postcondition. In this example, the pane on the right hand side shows that one ought to prove that the first branch of the <code>if</code> construct preserves the loop invariant. That is, the loop invariant <code>INV</code> and the guards <code>b ≠ 0</code> and <code>even b</code> implie a postcondition, obtained by applying substution <code>[a * 2, (b / 2) / a, b]</code> to the loop invariant <code>INV</code>.</p></li>
+<li><p>In line 16 we use <code>b := b - 1</code> to decrease the bound <code>b</code>. With this we can meet another verification condition demanding that the bound always decrease.</p></li>
+<li><p>In the screen shot we have yet to figure out what to fill in between line 13 - 15. However, Guabao has infered for us the pre and postconditions of the specification, from which one may conclude that <code>r := r + a</code> is the most sensible statement to use.</p></li>
+</ul>
+<h1 id="maximum-segment-sum">Maximum Segment Sum</h1>
+<p>One cannot talk about program derivation without mentioning the maximum segment sum problem: given an array of (possibly negative) integers, compute the largest possible sum of any consecutive segment.</p>
+<p>Notice definition of functions within <code>{: ... :}</code>, and use of Eindhoven quantifier notation, e.g. <code>⟨ Σ k : i ≤ k &lt; j : f[k] ⟩</code>.</p>
+<pre><code>con N : Int { N ≥ 0 }
+con f : array [0..N) of Int
+var s, r, n : Int
+
+{: sum i j = ⟨ Σ k : i ≤ k &lt; j : f[k] ⟩ :}
+{: P n = (s = ⟨ ↑ i j : 0 ≤ i ≤ j ≤ n : sum i j ⟩) :}
+{: Q n = (r = ⟨ ↑ i : 0 ≤ i ≤ n : sum i n ⟩) :}
+
+s, n := 0, 0
+{ P n ∧ Q n ∧ 0 ≤ n ≤ N , bnd: N - n }
+do n ≠ N -&gt;
+    r := (r + f[n]) ↑ 0
+    s := s ↑ r
+    n := n + 1
+od
+
+{ s = ⟨ ↑ i j : 0 ≤ i ≤ j ≤ N :
+          ⟨ + k : i ≤ k &lt; j : f[k] ⟩ ⟩ }</code></pre>
+<h1 id="integer-division-and-reminder">Integer Division and Reminder</h1>
+<p>Another textbook algorithm computing the quotient and reminder of <code>A/B</code> — that is, find <code>q</code> and <code>r</code> such that <code>A = q * B + r</code> and <code>0 ≤ r &lt; B</code>. Notice the use of Eindhoven style existentional quantifion.</p>
+<pre><code>con A, B : Int { A ≥ 0 ∧ B &gt; 0 }
+var q, b, r : Int
+
+{: PowOf2 b = ⟨ ∃ k : 0 ≤ k : b = B * 2^k ⟩ :}
+
+b := B
+{ PowOf2 b, bnd: A - b }
+do b ≤ A -&gt; b := b * 2 od
+{ PowOf2 b  ∧  b &gt; A }
+
+q, r := 0, A
+{ A = q * b + r  ∧  PowOf2 b  ∧  0 ≤ r &lt; b, bnd: b }
+do b ≠ B -&gt;
+   q, b := q * 2, b / 2
+   { A = q * b + r  ∧  PowOf2 b ∧  0 ≤ r &lt; b * 2 }
+   if r &lt; b -&gt; skip
+    | r ≥ b -&gt; q, r := q + 1, r - b
+   fi
+od
+{ A = q * B + r  ∧  0 ≤ r &lt; B }</code></pre>
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script src="https://scmu.github.io/plfp//public/js/script.js"></script>
+
+  </body>
+
+</html>

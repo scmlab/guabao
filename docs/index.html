@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <!---
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  -->
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Guabao &middot; Guabao
+    
+  </title>
+
+  
+      
+  <link rel="canonical" href="https://scmu.github.io/plfp//index.html">
+      
+  
+
+  <link rel="stylesheet" href="https://scmu.github.io/plfp//css/poole.css">
+  <link rel="stylesheet" href="https://scmu.github.io/plfp//css/syntax.css">
+  <link rel="stylesheet" href="https://scmu.github.io/plfp//css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!---
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ '/public/apple-touch-icon-precomposed.png' | absolute_url }}">
+  <link rel="shortcut icon" href="{{ '/public/favicon.ico' | absolute_url }}">
+  -->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://scmu.github.io/plfp//atom.xml">
+
+  <!--- deactivate google analytics
+  {% if site.google_analytics_id %}
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', '{{ site.google_analytics_id }}', 'auto');
+    ga('send', 'pageview');
+  </script>
+  {% endif %}
+  -->
+</head>
+
+
+  <body class="theme-base-0d">
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Guabao</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="https://scmu.github.io/plfp/">Home</a>
+
+    <!--- The code below dynamically generates a sidebar nav of the files in the folder /pages -->
+
+    
+      
+        <a class="sidebar-nav-item" href="https://scmu.github.io/plfp//pages/Examples.html">Examples</a>
+      
+    
+      
+        <a class="sidebar-nav-item" href="https://scmu.github.io/plfp//pages/Language%20Reference.html">Language Reference</a>
+      
+    
+
+    <a class="sidebar-nav-item" href="https://scmu.github.io/guabao">GitHub project</a>
+
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2021. All rights reserved.
+    </p>
+    <p>
+        <img src="https://scmu.github.io/plfp//images/haskell-logo.png" class="logo" style="display: inline;" />
+        Site created with
+        <a href="https://jaspervdj.be/hakyll">Hakyll</a>.
+        <br>
+        Modified theme
+        <a href="https://github.com/hahey/lanyon-hakyll">lanyon-hakyll</a>
+        based on
+        <a href="https://lanyon.getpoole.com/">Lanyon</a>.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="https://scmu.github.io/plfp/" title="Home">Guabao</a>
+            <small>Coding and Proving Hand in Hand</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+          <div class="page">
+  <h1 class="page-title">Guabao</h1>
+     <figure>
+<img src="images/guabao-saucesupreme.jpg" alt="Photo: Ron Dollete. CC BY-ND 2.0." /><figcaption aria-hidden="true"><small>Photo: <a href="https://www.flickr.com/photos/saucesupreme/4434798368">Ron Dollete</a>. CC BY-ND 2.0.</small></figcaption>
+</figure>
+<p>Guabao is a programming environment encouraging the methodology that a program and its correctness proof shuld be developing hand in hand, and that how a program should be proved could sometimes give hints how the program can be written.</p>
+<p>Guabao uses a variation of Edsger W. Dijkstra’s <a href="https://en.wikipedia.org/wiki/Guarded_Command_Language">Guarded Command Language</a> — see the <a href="pages/Language%20Reference.html">language reference</a>. However, Guabao is also an environment built into an editor. Shown below is a screen shot:</p>
+<p><img src="images/screenshot-v0.2.3.jpg" /></p>
+<p>As the program is being written in the left pane, Guabao instantly parses the program, infers, and displays in the right pane verification conditions yet to be proved to show that the program meets the postcondition.</p>
+<p>Code yet-to-be-written can be left as holes (specifications with pre and post consditions) to be filled in later, for example the hole between line 13 and 15. Attempts to prove verification conditions may give clues how the holes can be filled or, in case of failure, indicate that we need a stronger precondition or loop invariant.</p>
+<p>For more explanation of this particular example see the <a href="pages/Examples.html">Examples</a> page.</p>
+<p>Guabao currently does not prove anything for the users. It is possible, in the future, to employ an external theorem prover to do the job.</p>
+<p><strong>The Name</strong>. GUA in Guabao comes from GUArded command language. <a href="https://en.wikipedia.org/wiki/Gua_bao">Guabao (刈包)</a> is a street food popular in places including Taiwan, where Guabao the software was designed.</p>
+<h1 id="download-and-install">Download and Install</h1>
+<p>Guabao is implemented as an extension of <a href="https://code.visualstudio.com/">Visual Code Studio</a>. You can install it by searching for the extension “Guabao” in the editor, or through the <a href="https://marketplace.visualstudio.com/items?itemName=scmlab.guabao">Extensions Marketplace</a>. A simple one-click installation downloads the frontend as well as pre-compiled backend.</p>
+<h1 id="getting-started">Getting Started</h1>
+<p>More information can be found in the Tutorial, the <a href="pages/Language%20Reference.html">Language Reference</a>, and the <a href="pages/Examples.html">Examples</a> page.</p>
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script src="https://scmu.github.io/plfp//public/js/script.js"></script>
+
+  </body>
+
+</html>
