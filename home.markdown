@@ -7,7 +7,7 @@ title: Guabao
 Guabao is a programming environment encouraging the methodology that a program and its correctness proof shuld be developing hand in hand,
 and that how a program should be proved could sometimes give hints how the program can be written.
 
-Guabao uses a variation of Edsger W. Dijkstra's [Guarded Command Language](https://en.wikipedia.org/wiki/Guarded_Command_Language) --- see the [language reference](pages/Language%20Reference.html).
+Guabao uses a variation of Edsger W. Dijkstra's [Guarded Command Language](https://en.wikipedia.org/wiki/Guarded_Command_Language) --- see the [language overview](pages/1.%20Language%20Overview.html).
 However, Guabao is also an environment built into an editor.
 Shown below is a screen shot:
 
@@ -26,9 +26,19 @@ Guabao currently does not prove anything for the users. It is possible, in the f
 
 # Download and Install
 
-Guabao is implemented as an extension of [Visual Code Studio](https://code.visualstudio.com/). You can install it by searching for the extension "Guabao" in the editor, or through the [Extensions Marketplace](https://marketplace.visualstudio.com/items?itemName=scmlab.guabao).
-A simple one-click installation downloads the frontend as well as pre-compiled backend.
+The frontend of Guabao is an extension of [Visual Code Studio](https://code.visualstudio.com/). You can install it by searching for the extension "Guabao" in the editor, or through the [Extensions Marketplace](https://marketplace.visualstudio.com/items?itemName=scmlab.guabao).
+A simple one-click installation downloads the frontend as well as pre-compiled backend (implemented in Haskell).
 
-# Getting Started
+# Where to Start?
 
-More information can be found in the Tutorial, the [Language Reference](pages/Language%20Reference.html), and the [Examples](pages/Examples.html) page.
+More information can be found in the [tutorial](pages/0.%20Getting%20Started.html), the [Language Overview](pages/1.%20Language%20Overview.html), and the [Examples](pages/Examples.html) page.
+
+# More Info.
+
+Guabao is implemented and maintained by [Shin-Cheng Mu](https://scm.iis.sinica.edu.tw/home/), Ting-Yan Lai, and Thing-Han Lim in [Institute of Information Science](https://www.iis.sinica.edu.tw/), Academia Sinica, Taiwan.
+
+The backend of Guabao is implemented using [Haskell](https://www.haskell.org/), while the frontend is implemented using [Reason](https://reasonml.github.io/) and compiled to Javascript to run as a VS Code extension.
+Source code repositories for the [frontend](https://github.com/scmlab/gcl-vscode) and [backend](https://github.com/scmlab/gcl) are stored on GitHub.
+
+Guabao is still under development --- everything may change or break tomorrow! We welcome bug reports, feature requests, and other suggestions.
+Feel free to submit them as issues through the GitHub repositories above, or contact the authors.

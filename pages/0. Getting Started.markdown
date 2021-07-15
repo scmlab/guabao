@@ -1,0 +1,57 @@
+---
+title: Getting Started
+---
+
+<small>(This is a work-in-progress. A more complete, step-by-step tutorial shall be presented here.)</small>
+
+## Installation
+
+To install Guabao you must have [Visual Code Studio](https://code.visualstudio.com/). You can install Guabao by searching for the extension "Guabao" in the editor, or through the [Extensions Marketplace](https://marketplace.visualstudio.com/items?itemName=scmlab.guabao).
+A one-click installation downloads the frontend as well as pre-compiled backend.
+
+## Activation
+
+Once the extension is installed, activate Guabao by creating a new file and saving it with extension `.gcl` (for Guarded Command Language).
+
+Copying and pasting the code below to the pane in the left, you should see a screen similar to this:
+
+![](../images/screenshot-v0.2.3.jpg)
+
+```
+con A, B : Int { A ≥ 0 ∧ B ≥ 0 }
+con even, odd : Int -> Bool
+var r, a, b : Int
+
+{: INV = a * b + r = A * B ∧ 0 ≤ b :}
+a, b, r := A, B, 0
+{ INV, bnd: b }
+do b ≠ 0 ->
+    if even b -> a := a * 2
+                 b := b / 2
+     | odd b ->  ?
+                 b := b - 1
+    fi
+od
+{ r = A * B }
+```
+
+## The Interface
+
+* The program is in the left pane.
+  * A yellow wavy line indicates "there are verification conditions incurred here." Move the cursor there to see the details.
+* The right pane contains information including
+  * inferred verification conditions (only those on the path of the current location of the cursor are displayed),
+  * pre and postconditions of *specs* (holes missing code),
+  * global properties, etc.
+* Click on a defined identifier (e.g. `INV`) to expand it.
+* Each verification condition comes with a hash key. Pressing the hash key generates a comment in the program text, where a proof about the property is supposed to be given.
+
+## Key Combinations
+
+* `ctrl-c-r`: when the cursor is in a hole, pressing `ctrl-c-r` fills in the hole.
+* A question mark `?` generates a new hole.
+* The language uses UTF-8 characters in some occassions. Press `\` to input UTF-8 characters used in this language.
+
+## The Programming Language
+
+For more information about the programming language, see [Language Overview](1.%20Language%20Overview.html)

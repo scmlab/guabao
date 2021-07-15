@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <!---
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  -->
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Guarded Command Language Overview &middot; Guabao
+    
+  </title>
+
+  
+      
+  <link rel="canonical" href="https://scmlab.github.io/guabao//pages/1.%20Language%20Overview.html">
+      
+  
+
+  <link rel="stylesheet" href="https://scmlab.github.io/guabao//css/poole.css">
+  <link rel="stylesheet" href="https://scmlab.github.io/guabao//css/syntax.css">
+  <link rel="stylesheet" href="https://scmlab.github.io/guabao//css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!---
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ '/public/apple-touch-icon-precomposed.png' | absolute_url }}">
+  <link rel="shortcut icon" href="{{ '/public/favicon.ico' | absolute_url }}">
+  -->
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://scmlab.github.io/guabao//atom.xml">
+
+  <!--- deactivate google analytics
+  {% if site.google_analytics_id %}
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', '{{ site.google_analytics_id }}', 'auto');
+    ga('send', 'pageview');
+  </script>
+  {% endif %}
+  -->
+</head>
+
+
+  <body class="theme-base-0d">
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Guabao</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="https://scmlab.github.io/guabao/">Home</a>
+
+    <!--- The code below dynamically generates a sidebar nav of the files in the folder /pages -->
+
+    
+      
+        <a class="sidebar-nav-item" href="https://scmlab.github.io/guabao//pages/0.%20Getting%20Started.html">0. Getting Started</a>
+      
+    
+      
+        <a class="sidebar-nav-item active" href="https://scmlab.github.io/guabao//pages/1.%20Language%20Overview.html">1. Language Overview</a>
+      
+    
+      
+        <a class="sidebar-nav-item" href="https://scmlab.github.io/guabao//pages/2.%20Examples.html">2. Examples</a>
+      
+    
+
+    <a class="sidebar-nav-item" href="https://scmlab.github.io/guabao/">GitHub project</a>
+
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2021. All rights reserved.
+    </p>
+    <p>
+        <img src="https://scmlab.github.io/guabao//images/haskell-logo.png" class="logo" style="display: inline;" />
+        Site created with
+        <a href="https://jaspervdj.be/hakyll">Hakyll</a>.
+        <br>
+        Modified theme
+        <a href="https://github.com/hahey/lanyon-hakyll">lanyon-hakyll</a>
+        based on
+        <a href="https://lanyon.getpoole.com/">Lanyon</a>.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="https://scmlab.github.io/guabao/" title="Home">Guabao</a>
+            <small>Coding and Proving Hand in Hand</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+          <div class="page">
+  <h1 class="page-title">Guarded Command Language Overview</h1>
+     <p>This is a brief summary of the variation of Guarded Command Language used by Guabao.</p>
+<p>As a running example, the following program computes the greatest common divisor (<code>gcd</code>) of constants <code>A</code> and <code>B</code> and stores it in <code>r</code>, using what is perhaps one of the oldest algorithm.</p>
+<pre><code>con A, B : Int { A &gt; 0 ∧ B &gt; 0}
+con gcd : Int -&gt; Int -&gt; Int
+var x, y : Int
+
+x, y := A, B
+
+{ gcd x y = gcd A B ∧ x &gt; 0 ∧ y &gt; 0,
+  bnd: x + y }
+do x &lt; y -&gt; y := y - x
+ | x &gt; y -&gt; x := x - y
+od
+{ x = gcd A B }</code></pre>
+<p>From this example one may see that the main program consists of</p>
+<ul>
+<li>a declaration section,</li>
+<li>followed by the main program statements, and</li>
+<li>ends with a postcondition written in an assertion.</li>
+</ul>
+<h1 id="declarations">Declarations</h1>
+<p>Each declaration starts with a <code>con</code> or a <code>var</code> keyword, respectively denoting constants and variables. Constant declarations can be followed by an optional assertion containing properties the constants are assumed to hold.</p>
+<p>In the GCD program, for example, we declared two constants <code>A</code> and <code>B</code> of type <code>Int</code>, a constant <code>gcd</code> having type <code>Int -&gt; Int -&gt; Int</code>, and two variables <code>x</code> and <code>y</code> having type <code>Int</code>.</p>
+<pre><code>con A, B : Int { A &gt; 0 ∧ B &gt; 0}
+con gcd : Int -&gt; Int -&gt; Int
+var x, y : Int</code></pre>
+<h1 id="types">Types</h1>
+<p>Base types include <code>Int</code>, <code>Char</code>, and <code>Bool</code>. Function types are denoted by <code>t1 -&gt; t2</code>, currently used only in specifications.</p>
+<p>The type of arrays is denoted by <code>array interval of type</code>, where <code>interval</code> can be either opened or closed on both ends, and may refer to declared constants. In the example below we declared a constant <code>N</code>, about which all we know is that it is non-negative, and an array of <code>Int</code> whose elements may include <code>f[0]</code> but not <code>f[N]</code>.</p>
+<pre><code>con N : Int { N ≥ 0 }
+con f : array [0..N) of Int</code></pre>
+<h1 id="statements">Statements</h1>
+<h2 id="assertions">Assertions</h2>
+<p>Assertions are <code>Bool</code>-valued expressions written in curly brackets. For example,</p>
+<pre><code>{ x = gcd A B }</code></pre>
+<p>An assertion that appears immediately before a loop is the invariant of the loop. In this case we also need to specify, using the keyword <code>bnd</code>, the bound of the loop. The following is the invariant used in the GCD algorithm:</p>
+<pre><code>{ gcd x y = gcd A B ∧ x &gt; 0 ∧ y &gt; 0, bnd: x + y }</code></pre>
+<p>The bound must be an <code>Int</code>-valued expression. In a completed program, each loop must have an invariant and a bound.</p>
+<p>When an assertion that has a <code>bnd</code> part does not appear before a loop, the <code>bnd</code> part is ignored.</p>
+<h2 id="abort-skip-and-assignment">Abort, Skip, and Assignment</h2>
+<p>The statement <code>abort</code> aborts the program.</p>
+<p>The statement <code>skip</code> does nothing.</p>
+<p>Variable assignment is denoted by <code>:=</code>. Simultaneous assignment of multiple variables is allowed for simple variables. For example, the following statement simultaneously assigns the value of <code>y</code> to <code>x</code>, and the value of <code>x+y</code> <em>before the assignment</em> to <code>y</code>:</p>
+<pre><code>x, y := y, x+y</code></pre>
+<p>Given an array <code>f</code>, elements in it can be updated by <code>f[i] := e</code> where <code>i</code> is an <code>Int</code>-valued expression. For example:</p>
+<pre><code>f[f[0]] := 1</code></pre>
+<p>However, simultaneous assignment is currently not allowed for array updating.</p>
+<h2 id="guarded-commands">Guarded Commands</h2>
+<p>A <em>guarded command</em> has the form <code>B -&gt; S</code> where <code>B</code>, the “guard”, is a <code>Bool</code>-valued expression, and <code>S</code> is a (sequence of) program statement (guarded by <code>B</code>). Guarded commands cannot appear alone, but are essential building blocks of program constructs below.</p>
+<h2 id="conditional-branching">Conditional Branching</h2>
+<p>Conditional branching is denoted by <code>if B0 -&gt; S0 | B1 -&gt; S1 | ... | Bn -&gt; Sn fi</code>, where <code>B0 -&gt; S0</code>.. <code>Bn -&gt; Sn</code> are guarded commands. The operational interpretation is that the computer may execute an arbitrary <code>Si</code> whose corresponding guard <code>Bi</code> evaluates to <code>True</code>. When none of the guards is <code>True</code>, the program aborts.</p>
+<p>When written in multiple lines, Guabao uses ident-aware parsing to separate the guarded commands. For example:</p>
+<pre><code>if even b -&gt; a := a * 2
+             b := b / 2
+ | odd  b -&gt; c := a + c
+             b := b - 1
+fi</code></pre>
+<h2 id="loop">Loop</h2>
+<p>A loop is denoted by <code>do B0 -&gt; S0 | B1 -&gt; S1 | ... | Bn -&gt; Sn od</code>, where <code>B0 -&gt; S0</code>.. <code>Bn -&gt; Sn</code> are guarded commands. For example, this is a loop enclosing two guarded commands:</p>
+<pre><code>do p ≠ 0 ∧ mod p x = 0 -&gt; y, p := y + 1, p - x
+ | p ≠ 0 ∧ mod p y = 0 -&gt; x, p := x + 1, p - y
+od</code></pre>
+<p>The loop above * performs <code>y, p := y + 1, p - x</code> if <code>p ≠ 0 ∧ mod p x = 0</code>, * performs <code>x, p := x + 1, p - y</code> if <code>p ≠ 0 ∧ mod p y = 0</code>, * If both guards are true, the computer is free to choose any branch. * If both guards are false (for example when <code>p = 0</code>), the loop terminates.</p>
+<h1 id="expressions">Expressions</h1>
+<p>We currently support</p>
+<ul>
+<li>arithmetic operations: <code>+, -, *, /</code>, <code>↑</code> and <code>↓</code> for (binary) maximum and minimum, and <code>^</code> for exponential.</li>
+<li>Binary relations: <code>=, ≠, &lt;, ≤, ≥, &gt;</code>. One may also write <code>&lt;=</code> and <code>&gt;=</code>.</li>
+<li>Logical operators: <code>¬, ∧, ∨, ⇒</code>. One may also wrote <code>&amp;&amp;</code> and <code>||</code> for conjunction and disjunction.</li>
+</ul>
+<p>Regarding quantification, we use the Eindhoven notation, e.g. <code>⟨ Σ k : i ≤ k &lt; j : f[k] ⟩</code>.</p>
+<h1 id="comments">Comments</h1>
+<p>We currently allow two style of comments:</p>
+<pre><code>-- single line comments, and
+
+{- blocked, multiline comments
+    {- that can be nested -}
+  -}</code></pre>
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script src="https://scmlab.github.io/guabao//public/js/script.js"></script>
+
+  </body>
+
+</html>
