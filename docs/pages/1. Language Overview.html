@@ -48,7 +48,7 @@
 </head>
 
 
-  <body class="theme-base-0d">
+  <body class="theme-base-09">
 
     <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
      styles, `#sidebar-checkbox` for behavior. -->
@@ -78,8 +78,12 @@
         <a class="sidebar-nav-item" href="https://scmlab.github.io/guabao//pages/2.%20Examples.html">2. Examples</a>
       
     
+      
+        <a class="sidebar-nav-item" href="https://scmlab.github.io/guabao//pages/References.html">References</a>
+      
+    
 
-    <a class="sidebar-nav-item" href="https://scmlab.github.io/guabao/">GitHub project</a>
+    <a class="sidebar-nav-item" href="https://github.com/scmlab/gcl">GitHub project</a>
 
   </nav>
 
@@ -178,7 +182,13 @@ fi</code></pre>
 <pre><code>do p ≠ 0 ∧ mod p x = 0 -&gt; y, p := y + 1, p - x
  | p ≠ 0 ∧ mod p y = 0 -&gt; x, p := x + 1, p - y
 od</code></pre>
-<p>The loop above * performs <code>y, p := y + 1, p - x</code> if <code>p ≠ 0 ∧ mod p x = 0</code>, * performs <code>x, p := x + 1, p - y</code> if <code>p ≠ 0 ∧ mod p y = 0</code>, * If both guards are true, the computer is free to choose any branch. * If both guards are false (for example when <code>p = 0</code>), the loop terminates.</p>
+<p>The loop above</p>
+<ul>
+<li>performs <code>y, p := y + 1, p - x</code> if <code>p ≠ 0 ∧ mod p x = 0</code>, and</li>
+<li>performs <code>x, p := x + 1, p - y</code> if <code>p ≠ 0 ∧ mod p y = 0</code>.</li>
+<li>If both guards are true, the computer is free to choose any branch.</li>
+<li>If both guards are false (for example when <code>p = 0</code>), the loop terminates.</li>
+</ul>
 <h1 id="expressions">Expressions</h1>
 <p>We currently support</p>
 <ul>

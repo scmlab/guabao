@@ -127,10 +127,11 @@ do p ≠ 0 ∧ mod p x = 0 -> y, p := y + 1, p - x
 od
 ```
 The loop above
-  * performs `y, p := y + 1, p - x` if `p ≠ 0 ∧ mod p x = 0`,
-  * performs `x, p := x + 1, p - y` if `p ≠ 0 ∧ mod p y = 0`,
-  * If both guards are true, the computer is free to choose any branch.
-  * If both guards are false (for example when `p = 0`), the loop terminates.
+
+* performs `y, p := y + 1, p - x` if `p ≠ 0 ∧ mod p x = 0`, and
+* performs `x, p := x + 1, p - y` if `p ≠ 0 ∧ mod p y = 0`.
+* If both guards are true, the computer is free to choose any branch.
+* If both guards are false (for example when `p = 0`), the loop terminates.
 
 # Expressions
 

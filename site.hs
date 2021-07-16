@@ -23,12 +23,24 @@ config = defaultConfiguration
   { destinationDirectory = "docs"
   }
 
+static :: Pattern -> Rules ()
+static f = match f $ do
+    route   idRoute
+    compile copyFileCompiler
+
+directory :: (Pattern -> Rules a) -> String -> Rules a
+directory act f = act $ fromGlob $ f ++ "/**"
+
 mkAssets, mkCSS, mkError, mkPages, mkIndex,
  mkTemplate, mkAtomXML :: Rules ()
 
-mkAssets = match ("images/*" .||. "js/*") $ do
-      route   idRoute
-      compile copyFileCompiler
+mkAssets =
+  mapM_ (directory static) ["images", "js"]
+  -- match ("images/*" .||. "js/*") $ do
+  --     route   idRoute
+  --     compile copyFileCompiler
+
+
 
 mkCSS = match "css/*" $ do
       route   idRoute
@@ -160,7 +172,7 @@ siteCtx =
     constField "tagline" "Coding and Proving Hand in Hand" `mappend`
     constField "site-title" "Guabao" `mappend`
     constField "copy-year" "2021" `mappend`
-    constField "github-repo" "https://scmlab.github.io/guabao/" `mappend`
+    constField "github-repo" "https://github.com/scmlab/gcl" `mappend`
     defaultContext
 
 baseCtx =
