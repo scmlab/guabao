@@ -4,8 +4,8 @@ title: Guabao
 
 ![<small>Photo: [Ron Dollete](https://www.flickr.com/photos/saucesupreme/4434798368). CC BY-ND 2.0.</small>](images/guabao-saucesupreme.jpg)
 
-Guabao is a programming environment encouraging the methodology that a program and its correctness proof shuld be developing hand in hand,
-and that how a program should be proved could sometimes give hints how the program can be written.
+Guabao is a programming environment encouraging the methodology that **a program and its correctness proof should be developing hand in hand**,
+and that **how a program should be proved could sometimes give hints how the program can be written**.
 
 Guabao uses a variation of Edsger W. Dijkstra's [Guarded Command Language](https://en.wikipedia.org/wiki/Guarded_Command_Language) --- see the [language overview](pages/1.%20Language%20Overview.html).
 However, Guabao is also an environment built into an editor.
@@ -38,7 +38,7 @@ More information can be found in the [tutorial](pages/0.%20Getting%20Started.htm
 Guabao is implemented and maintained by [Shin-Cheng Mu](https://scm.iis.sinica.edu.tw/home/), Ting-Yan Lai, and Thing-Han Lim in [Institute of Information Science](https://www.iis.sinica.edu.tw/), Academia Sinica, Taiwan.
 
 The backend of Guabao is implemented using [Haskell](https://www.haskell.org/), while the frontend is implemented using [Reason](https://reasonml.github.io/) and compiled to Javascript to run as a VS Code extension.
-Source code repositories for the [frontend](https://github.com/scmlab/gcl-vscode) and [backend](https://github.com/scmlab/gcl) are stored on GitHub.
+Source code for the [frontend](https://github.com/scmlab/gcl-vscode) and [backend](https://github.com/scmlab/gcl) are stored on GitHub.
 
 Guabao is still under development --- everything may change or break tomorrow! We welcome bug reports, feature requests, and other suggestions.
-Feel free to submit them as issues through the GitHub repositories above, or contact the authors.
+Feel free to submit them as issues through the GitHub repositories above, or [contact](pages/Contacts.html) the authors.

@@ -79,11 +79,15 @@
       
     
       
+        <a class="sidebar-nav-item" href="https://scmlab.github.io/guabao//pages/Contacts.html">Contacts</a>
+      
+    
+      
         <a class="sidebar-nav-item" href="https://scmlab.github.io/guabao//pages/References.html">References</a>
       
     
 
-    <a class="sidebar-nav-item" href="https://github.com/scmlab/gcl">GitHub project</a>
+    <!--- a class="sidebar-nav-item" href="https://github.com/scmlab/gcl">GitHub project</a -->
 
   </nav>
 
@@ -120,7 +124,7 @@
       <div class="container content">
           <div class="page">
   <h1 class="page-title">Guarded Command Language Overview</h1>
-     <p>This is a brief summary of the variation of Guarded Command Language used by Guabao.</p>
+     <p>Guabao uses a variation of Guarded Command Language based on that in <a href="pages/Reference.html">Anne Kaldewaij’s book</a>, with slight variation in syntax.</p>
 <p>As a running example, the following program computes the greatest common divisor (<code>gcd</code>) of constants <code>A</code> and <code>B</code> and stores it in <code>r</code>, using what is perhaps one of the oldest algorithm.</p>
 <pre><code>con A, B : Int { A &gt; 0 ∧ B &gt; 0}
 con gcd : Int -&gt; Int -&gt; Int

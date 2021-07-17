@@ -48,22 +48,9 @@ od
 
 * The purpose of the program is stated in the postcondition `{ r = A * B }`.
 
-* Loop and conditional branches are respectively denoted by `do...od` and `if...fi`, both accepting guarded commands in their bodies. Notice the  indent-aware syntax.
+* Loop and conditional branches are respectively denoted by `do...od` and `if...fi`, both accepting guarded commands in their bodies. Notice the indent-aware syntax.
 
 * The loop invariant is `a * b + r = A * B ∧ 0 ≤ b`, and the bound is `b`.
-
-Recall the screen shot:
-
-![](../images/screenshot-v0.2.3.jpg)
-
-* The loop invariant is abbreviated to `INV` in the declaration block `{: ... :}` on line 5.
-* As the program is being written, Guabao instantly parses the program and infers verification conditions yet to be proved to show that the program meets the postcondition.
- In this example, the pane on the right hand side shows that one ought to prove that the first branch of the `if` construct preserves the loop invariant. That is, the loop invariant `INV` and the guards `b ≠ 0` and `even b` implie a postcondition, obtained by applying substution `[a * 2, (b / 2) / a, b]` to the loop invariant `INV`.
-
-* In line 16 we use `b := b - 1` to decrease the bound `b`. With this we can meet another verification condition demanding that the bound always decrease.
-
-* In the screen shot we have yet to figure out what to fill in between line
-13 - 15. However, Guabao has infered for us the pre and postconditions of the specification, from which one may conclude that `r := r + a` is the most sensible statement to use.
 
 # Maximum Segment Sum
 
@@ -97,7 +84,6 @@ od
 
 Another textbook algorithm computing the quotient and reminder of `A/B` ---
 that is, find `q` and `r` such that `A = q * B + r` and `0 ≤ r < B`.
-Notice the use of Eindhoven style existentional quantifion.
 
 ```
 con A, B : Int { A ≥ 0 ∧ B > 0 }
@@ -121,3 +107,6 @@ do b ≠ B ->
 od
 { A = q * B + r  ∧  0 ≤ r < B }
 ```
+
+* Notice the use of Eindhoven style existentional quantificaton.
+* Logical identifiers can be defined in `{: ... :}`.

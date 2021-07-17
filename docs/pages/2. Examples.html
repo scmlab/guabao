@@ -79,11 +79,15 @@
       
     
       
+        <a class="sidebar-nav-item" href="https://scmlab.github.io/guabao//pages/Contacts.html">Contacts</a>
+      
+    
+      
         <a class="sidebar-nav-item" href="https://scmlab.github.io/guabao//pages/References.html">References</a>
       
     
 
-    <a class="sidebar-nav-item" href="https://github.com/scmlab/gcl">GitHub project</a>
+    <!--- a class="sidebar-nav-item" href="https://github.com/scmlab/gcl">GitHub project</a -->
 
   </nav>
 
@@ -157,14 +161,6 @@ od
 <li><p>Loop and conditional branches are respectively denoted by <code>do...od</code> and <code>if...fi</code>, both accepting guarded commands in their bodies. Notice the indent-aware syntax.</p></li>
 <li><p>The loop invariant is <code>a * b + r = A * B ∧ 0 ≤ b</code>, and the bound is <code>b</code>.</p></li>
 </ul>
-<p>Recall the screen shot:</p>
-<p><img src="../images/screenshot-v0.2.3.jpg" /></p>
-<ul>
-<li><p>The loop invariant is abbreviated to <code>INV</code> in the declaration block <code>{: ... :}</code> on line 5.</p></li>
-<li><p>As the program is being written, Guabao instantly parses the program and infers verification conditions yet to be proved to show that the program meets the postcondition. In this example, the pane on the right hand side shows that one ought to prove that the first branch of the <code>if</code> construct preserves the loop invariant. That is, the loop invariant <code>INV</code> and the guards <code>b ≠ 0</code> and <code>even b</code> implie a postcondition, obtained by applying substution <code>[a * 2, (b / 2) / a, b]</code> to the loop invariant <code>INV</code>.</p></li>
-<li><p>In line 16 we use <code>b := b - 1</code> to decrease the bound <code>b</code>. With this we can meet another verification condition demanding that the bound always decrease.</p></li>
-<li><p>In the screen shot we have yet to figure out what to fill in between line 13 - 15. However, Guabao has infered for us the pre and postconditions of the specification, from which one may conclude that <code>r := r + a</code> is the most sensible statement to use.</p></li>
-</ul>
 <h1 id="maximum-segment-sum">Maximum Segment Sum</h1>
 <p>One cannot talk about program derivation without mentioning the maximum segment sum problem: given an array of (possibly negative) integers, compute the largest possible sum of any consecutive segment.</p>
 <p>Notice definition of functions within <code>{: ... :}</code>, and use of Eindhoven quantifier notation, e.g. <code>⟨ Σ k : i ≤ k &lt; j : f[k] ⟩</code>.</p>
@@ -187,7 +183,7 @@ od
 { s = ⟨ ↑ i j : 0 ≤ i ≤ j ≤ N :
           ⟨ + k : i ≤ k &lt; j : f[k] ⟩ ⟩ }</code></pre>
 <h1 id="integer-division-and-reminder">Integer Division and Reminder</h1>
-<p>Another textbook algorithm computing the quotient and reminder of <code>A/B</code> — that is, find <code>q</code> and <code>r</code> such that <code>A = q * B + r</code> and <code>0 ≤ r &lt; B</code>. Notice the use of Eindhoven style existentional quantifion.</p>
+<p>Another textbook algorithm computing the quotient and reminder of <code>A/B</code> — that is, find <code>q</code> and <code>r</code> such that <code>A = q * B + r</code> and <code>0 ≤ r &lt; B</code>.</p>
 <pre><code>con A, B : Int { A ≥ 0 ∧ B &gt; 0 }
 var q, b, r : Int
 
@@ -208,6 +204,10 @@ do b ≠ B -&gt;
    fi
 od
 { A = q * B + r  ∧  0 ≤ r &lt; B }</code></pre>
+<ul>
+<li>Notice the use of Eindhoven style existentional quantificaton.</li>
+<li>Logical identifiers can be defined in <code>{: ... :}</code>.</li>
+</ul>
 </div>
 
       </div>

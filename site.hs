@@ -177,7 +177,7 @@ siteCtx =
 
 baseCtx =
     constField "baseurl" "https://scmlab.github.io/guabao/"
-               -- "http://localhost:8000"
+               --- "http://localhost:8000"
 
 --------------------------------------------------------------------------------
 
