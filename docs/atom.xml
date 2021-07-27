@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title>Guabao</title>
-    <link href="https://scmlab.github.io/guabao//atom.xml" rel="self" />
-    <link href="https://scmlab.github.io/guabao/" />
-    <id>https://scmlab.github.io/guabao//atom.xml</id>
+    <link href="https://scmlab.github.io/guabao/atom.xml" rel="self" />
+    <link href="https://scmlab.github.io/guabao" />
+    <id>https://scmlab.github.io/guabao/atom.xml</id>
     <author>
         <name>Shin-Cheng Mu</name>
         <email>scm@iis.sinica.edu.tw</email>

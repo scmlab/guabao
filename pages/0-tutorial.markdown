@@ -5,7 +5,7 @@ title: Tutorial
 <small>**Disclaimer** This is a quick tutorial on interacting with the Guabao environment.
 We will give a quick grasp of the program derivation methodology that Guabao supports.
 However, this is certainly not a sufficient introduction to the methodology itself.
-For that we refer the readers to materials in the [References](pages/Reference.html).</small>
+For that we refer the readers to materials in the [References](pages/4-references.html).</small>
 
 ## Installation
 
@@ -15,7 +15,7 @@ A one-click installation downloads the frontend as well as pre-compiled backend.
 ## Activation
 
 Once the extension is installed, activate Guabao by creating a new file and saving it with extension `.gcl` (for Guarded Command Language). Gaubao uses a variation of [Guarded Command Language](https://en.wikipedia.org/wiki/Guarded_Command_Language).
-We will introduce the language as we go in this tutorial. See [Language Overview](1.%20Language%20Overview.html) for a more complete summary.
+We will introduce the language as we go in this tutorial. See [Language Overview](1-gcl-overview.html) for a more complete summary.
 
 Shown below is an incomplete GCL program which we will use as our running example.
 We declare two constants `A` and `B`, about them all we know is that they are both non-egative
@@ -48,7 +48,7 @@ We will attempt to complete the task, but the arithmetic operations we use are l
 
 We will need at least a loop for such a non-trivial task, and
 *each loop must have an invariant and a bound*.
-Various techniques were developed to construct candidates of loop invariants from the postcondition. We cannot cover them here and refer the readers to the [References](pages/Reference.html) page.
+Various techniques were developed to construct candidates of loop invariants from the postcondition. We cannot cover them here and refer the readers to the [References](pages/4-references.html) page.
 For this problem,
 ```
 a * b + r = A * B
@@ -245,4 +245,4 @@ It is this style of program development Guabao is designed to support .
 
 ## The Programming Language
 
-For more information about the programming language, see [Language Overview](1.%20Language%20Overview.html).
+For more information about the programming language, see [Language Overview](1-gcl-overview.html).

@@ -17,7 +17,7 @@
 
   
       
-  <link rel="canonical" href="https://scmlab.github.io/guabao/pages/0.%20Getting%20Started.html">
+  <link rel="canonical" href="https://scmlab.github.io/guabao/pages/0-tutorial.html">
       
   
 
@@ -67,23 +67,23 @@
 
     
       
-        <a class="sidebar-nav-item active" href="https://scmlab.github.io/guabao/pages/0.%20Getting%20Started.html">Tutorial</a>
+        <a class="sidebar-nav-item active" href="https://scmlab.github.io/guabao/pages/0-tutorial.html">Tutorial</a>
       
     
       
-        <a class="sidebar-nav-item" href="https://scmlab.github.io/guabao/pages/1.%20Language%20Overview.html">Guarded Command Language Overview</a>
+        <a class="sidebar-nav-item" href="https://scmlab.github.io/guabao/pages/1-gcl-overview.html">Guarded Command Language Overview</a>
       
     
       
-        <a class="sidebar-nav-item" href="https://scmlab.github.io/guabao/pages/2.%20Examples.html">Examples</a>
+        <a class="sidebar-nav-item" href="https://scmlab.github.io/guabao/pages/2-examples.html">Examples</a>
       
     
       
-        <a class="sidebar-nav-item" href="https://scmlab.github.io/guabao/pages/Contacts.html">Contacts</a>
+        <a class="sidebar-nav-item" href="https://scmlab.github.io/guabao/pages/3-contacts.html">Contacts</a>
       
     
       
-        <a class="sidebar-nav-item" href="https://scmlab.github.io/guabao/pages/References.html">References</a>
+        <a class="sidebar-nav-item" href="https://scmlab.github.io/guabao/pages/4-references.html">References</a>
       
     
 
@@ -124,11 +124,11 @@
       <div class="container content">
           <div class="page">
   <h1 class="page-title">Tutorial</h1>
-     <p><small><strong>Disclaimer</strong> This is a quick tutorial on interacting with the Guabao environment. We will give a quick grasp of the program derivation methodology that Guabao supports. However, this is certainly not a sufficient introduction to the methodology itself. For that we refer the readers to materials in the <a href="pages/Reference.html">References</a>.</small></p>
+     <p><small><strong>Disclaimer</strong> This is a quick tutorial on interacting with the Guabao environment. We will give a quick grasp of the program derivation methodology that Guabao supports. However, this is certainly not a sufficient introduction to the methodology itself. For that we refer the readers to materials in the <a href="pages/4-references.html">References</a>.</small></p>
 <h2 id="installation">Installation</h2>
 <p>To install Guabao you must have <a href="https://code.visualstudio.com/">Visual Code Studio</a>. You can install Guabao by searching for the extension “Guabao” in the editor, or through the <a href="https://marketplace.visualstudio.com/items?itemName=scmlab.guabao">Extensions Marketplace</a>. A one-click installation downloads the frontend as well as pre-compiled backend.</p>
 <h2 id="activation">Activation</h2>
-<p>Once the extension is installed, activate Guabao by creating a new file and saving it with extension <code>.gcl</code> (for Guarded Command Language). Gaubao uses a variation of <a href="https://en.wikipedia.org/wiki/Guarded_Command_Language">Guarded Command Language</a>. We will introduce the language as we go in this tutorial. See <a href="1.%20Language%20Overview.html">Language Overview</a> for a more complete summary.</p>
+<p>Once the extension is installed, activate Guabao by creating a new file and saving it with extension <code>.gcl</code> (for Guarded Command Language). Gaubao uses a variation of <a href="https://en.wikipedia.org/wiki/Guarded_Command_Language">Guarded Command Language</a>. We will introduce the language as we go in this tutorial. See <a href="1-gcl-overview.html">Language Overview</a> for a more complete summary.</p>
 <p>Shown below is an incomplete GCL program which we will use as our running example. We declare two constants <code>A</code> and <code>B</code>, about them all we know is that they are both non-egative (as asserted in <code>{ A ≥ 0 ∧ B ≥ 0 }</code> — assertions are enclosed in curly brackets), and constant functions <code>even</code> and <code>odd</code>, which we will use later. Also declared are three variables <code>r</code>, <code>a</code>, and <code>b</code>, all of them having type <code>Int</code>. The goal of the program is to store the value of <code>A * B</code> in variable <code>r</code>, as stated in the postcondition <code>{ r = A * B }</code>.</p>
 <pre><code>con A, B : Int { A ≥ 0 ∧ B ≥ 0 }
 con even, odd : Int -&gt; Bool
@@ -141,7 +141,7 @@ var r, a, b : Int
 <p>The question mark <code>?</code> has been extended to a <em>spec</em> — a hole in the program to be filled in. To complete the program we are supposed in fill in a piece of code that brings the state of the system from precondition <code>True</code> to postcondition <code>r = A * B</code>. What we know about global constants (namely <code>A ≥ 0 ∧ B ≥ 0</code>) are universally true, and therefore displayed in a separate pane.</p>
 <p>We will attempt to complete the task, but the arithmetic operations we use are limited to addition, subtraction, multiplication and division by 2, and <code>even</code> and <code>odd</code>. This is a common exercise, and was once a useful one for early microcomputers, which did not have an atomic instruction for general multiplication (multiplication by 2 involves only bit-shifting and is much cheaper).</p>
 <h2 id="introducing-a-loop">Introducing a Loop</h2>
-<p>We will need at least a loop for such a non-trivial task, and <em>each loop must have an invariant and a bound</em>. Various techniques were developed to construct candidates of loop invariants from the postcondition. We cannot cover them here and refer the readers to the <a href="pages/Reference.html">References</a> page. For this problem,</p>
+<p>We will need at least a loop for such a non-trivial task, and <em>each loop must have an invariant and a bound</em>. Various techniques were developed to construct candidates of loop invariants from the postcondition. We cannot cover them here and refer the readers to the <a href="pages/4-references.html">References</a> page. For this problem,</p>
 <pre><code>a * b + r = A * B</code></pre>
 <p>is a loop invariant that might work, with bound <code>b</code>.</p>
 <p>Copy and paste or type the following code into the spec. To type unicode characters, press ’' and follow the hints in the drop-down menu.</p>
@@ -251,7 +251,7 @@ od
 <li>The language uses unicode characters in various occasions. Press <code>\</code> to input unicode characters used in this language.</li>
 </ul>
 <h2 id="the-programming-language">The Programming Language</h2>
-<p>For more information about the programming language, see <a href="1.%20Language%20Overview.html">Language Overview</a>.</p>
+<p>For more information about the programming language, see <a href="1-gcl-overview.html">Language Overview</a>.</p>
 </div>
 
       </div>

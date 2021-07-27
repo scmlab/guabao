@@ -2,7 +2,7 @@
 title: Guarded Command Language Overview
 ---
 
-Guabao uses a variation of Guarded Command Language based on that in [Anne Kaldewaij's book](pages/Reference.html), with slight variation in syntax. 
+Guabao uses a variation of Guarded Command Language based on that in [Anne Kaldewaij's book](pages/4-references.html), with slight variation in syntax.
 
 As a running example, the following program computes the greatest common divisor (`gcd`) of constants `A` and `B` and stores it in `r`, using what is perhaps one of the oldest algorithm.
 
