@@ -14,11 +14,11 @@ A one-click installation downloads the frontend as well as pre-compiled backend.
 
 ## Activation
 
-Once the extension is installed, activate Guabao by creating a new file and saving it with extension `.gcl` (for Guarded Command Language). Gaubao uses a variation of [Guarded Command Language](https://en.wikipedia.org/wiki/Guarded_Command_Language).
+Once the extension is installed, activate Guabao by creating a new file and saving it with extension `.gcl` (for Guarded Command Language). Guabao uses a variation of [Guarded Command Language](https://en.wikipedia.org/wiki/Guarded_Command_Language).
 We will introduce the language as we go in this tutorial. See [Language Overview](1-gcl-overview.html) for a more complete summary.
 
 Shown below is an incomplete GCL program which we will use as our running example.
-We declare two constants `A` and `B`, about them all we know is that they are both non-egative
+We declare two constants `A` and `B`, about them all we know is that they are both non-negative
 (as asserted in `{ A ≥ 0 ∧ B ≥ 0 }` --- assertions are enclosed in curly brackets),
 and constant functions `even` and `odd`, which we will use later.
 Also declared are three variables `r`, `a`, and `b`, all of them having type `Int`.
@@ -56,7 +56,7 @@ a * b + r = A * B
 is a loop invariant that might work, with bound `b`.
 
 Copy and paste or type the following code into the spec.
-To type unicode characters, press '\' and follow the hints in the drop-down menu.
+To type unicode characters, press '\\' and follow the hints in the drop-down menu.
 ```
 a, b, r := A, B, 0
 { a * b + r = A * B, bnd: b }
