@@ -11,11 +11,11 @@ Guabao uses a variation of Edsger W. Dijkstra's [Guarded Command Language](https
 However, Guabao is also an environment built into an editor.
 Shown below is a screen shot:
 
-![](images/tutorial/tutorial03.jpg)
+![](images/tutorial/tutorial04.jpg)
 
-As the program is being written in the left pane, Guabao instantly parses the program, infers, and displays in the right pane verification conditions yet to be proved to show that the program meets the postcondition.
+As the program is being written in the left pane, Guabao instantly parses the program, infers, and displays in the right pane proof obligations yet to be proved to show that the program meets the postcondition.
 
-Code yet-to-be-written can be left as holes (specifications with pre and post consditions) to be filled in later, for example the hole between line 8 and 10. Attempts to prove verification conditions may give clues how the holes can be filled or, in case of failure, indicate that we need a stronger precondition or loop invariant.
+Code yet-to-be-written can be left as holes (specifications with pre and post consditions) to be filled in later, for example the hole between line 8 -- 10. Attempts to prove the proof obligations may give clues how the holes can be filled or, in case of failure, indicate that we need a stronger precondition or loop invariant.
 
 See the [tutorial](pages/0-tutorial.html) for more explanations.
 
