@@ -5,12 +5,14 @@ title: Tutorial
 <small>**Disclaimer** This is a quick tutorial on interacting with the Guabao environment.
 We will give a quick grasp of the program derivation methodology that Guabao supports.
 However, this is certainly not a sufficient introduction to the methodology itself.
-For that we refer the readers to materials in the [References](pages/4-references.html).</small>
+For that we refer the readers to materials in the [References](4-references.html).</small>
 
 ## Installation
 
 To install Guabao you must have [Visual Code Studio](https://code.visualstudio.com/). You can install Guabao by searching for the extension "Guabao" in the editor, or through the [Extensions Marketplace](https://marketplace.visualstudio.com/items?itemName=scmlab.guabao).
 A one-click installation downloads the frontend as well as pre-compiled backend.
+
+[Z3](https://github.com/Z3Prover/z3) has to be installed separately and locatable from `$PATH`. You do not need Z3 to run Guabao if you do not use the SMT-solving feature.
 
 ## Activation
 
@@ -18,17 +20,17 @@ Once the extension is installed, activate Guabao by creating a new file and savi
 We will introduce the language as we go in this tutorial. See [Language Overview](1-gcl-overview.html) for a more complete summary.
 
 Shown below is an incomplete GCL program which we will use as our running example.
-We declare two constants `A` and `B`, about them all we know is that they are both non-negative
-(as asserted in `{ A ≥ 0 ∧ B ≥ 0 }` --- assertions are enclosed in curly brackets),
+We declare two constants `A` and `B`, about them all we know is that `B` is non-negative
+(as asserted in `{ B ≥ 0 }` --- assertions are enclosed in curly brackets),
 and constant functions `even` and `odd`, which we will use later.
 Also declared are three variables `r`, `a`, and `b`, all of them having type `Int`.
 The goal of the program is to store the value of `A * B` in variable `r`,
 as stated in the postcondition `{ r = A * B }`.
 
 ```
-con A, B : Int { A ≥ 0 ∧ B ≥ 0 }
+con A, B : Int { B ≥ 0 }
 con even, odd : Int -> Bool
-var r, a, b : Int
+var r : Int
 
 ?
 { r = A * B }
@@ -40,7 +42,7 @@ and you should see a screen similar to the screen shot below.
 ![](../images/tutorial/tutorial00.jpg)
 
 The question mark `?` has been extended to a *spec* --- a hole in the program to be filled in. To complete the program we are supposed in fill in a piece of code that brings the state of the system from precondition `True` to postcondition `r = A * B`.
-What we know about global constants (namely `A ≥ 0 ∧ B ≥ 0`) are universally true, and therefore displayed in a separate pane.
+What we know about global constants (namely `B ≥ 0`) are universally true, and therefore displayed in a separate pane.
 
 We will attempt to complete the task, but the arithmetic operations we use are limited to addition, subtraction, multiplication and division by 2, and `even` and `odd`. This is a common exercise, and was once a useful one for early microcomputers, which did not have an atomic instruction for general multiplication (multiplication by 2 involves only bit-shifting and is much cheaper).
 
@@ -48,7 +50,7 @@ We will attempt to complete the task, but the arithmetic operations we use are l
 
 We will need at least a loop for such a non-trivial task, and
 *each loop must have an invariant and a bound*.
-Various techniques were developed to construct candidates of loop invariants from the postcondition. We cannot cover them here and refer the readers to the [References](pages/4-references.html) page.
+Various techniques were developed to construct candidates of loop invariants from the postcondition. We cannot cover them here and refer the readers to the [References](4-references.html) page.
 For this problem,
 ```
 a * b + r = A * B
@@ -67,54 +69,53 @@ od
 In the code we initialize the variables `a, b, r` to satisfy the loop invariant.
 The guard of the loop is `b ≠ 0`.
 The body of the loop is yet to be constructed.
+
+Your current screen may look like:
+![](../images/tutorial/tutorial01.jpg)
+
 When the cursor is in the spec, press `ctrl-c-r` to fill in the spec.
 You shall see something similar to the screen shot below:
 
-![](../images/tutorial/tutorial01.jpg)
+![](../images/tutorial/tutorial02.jpg)
 
 ## The Interface
 
 Taking a look at the interface:
 
-The program is in the left pane. The right pane contains information including
+The program is in the left pane. In the program in the left pane,
+blue shade in the code indicates ``there are proof obligations incurred here.''
+Program locations associated with more POs get thicker shades.
 
-* inferred verification conditions (only those on the path of the current location of the cursor are displayed),
-* pre and postconditions of *specs* (holes missing code),
+The right pane contains information including
+* inferred proof obligations (only those on the path of the current location of the cursor are displayed),
+* pre/postconditions of *specs* (holes missing code),
 * global properties, etc.
 
-A yellow wavy line indicates "there are verification conditions incurred here."
-In the screen shoot, the cursor is on line 7, beginning of the loop, and the right pane shows, among other proof obligations,
+Since the number of proof obligations can be large, in the right pane we display those on the path of the current location of the cursor.
+In the screen shoot, the right pane shows, among other proof obligations,
 ```
 (a * b) + r = A * B ∧ ¬ b ≠ 0   ⇒   r = A * B
-```
-that is, the invariant and the negation of the guard guarantee the postcondition, and
-```
 (a * b) + r = A * B ∧ b ≠ 0   ⇒   b ≥ 0
 ```
-that is, the bound `b` is non-negative as long as the loop is still running.
+The first is proof obligation is labelled "InvBase".
+It says that the invariant and the negation of the guard guarantee the postcondition.
+The second, labelled "TermBase", says that the bound `b` is non-negative as long as the loop is still running.
 
-Move the cursor to other yellow wavy lines to see other proof obligations.
+Move the cursor around to see other proof obligations.
 
-Each proof obligation comes with a hash key.
-Press the hash key for the first proof obligation, for example:
+The proof obligation InvBase is trivial to prove --- in fact, the invariant and the bound were designed to make it trivial. At the top of the box displaying this PO there is a icons of a magic wand.
+Clicking on it invokes the SMT solver Z3, which generates the output "Q.E.D.", indicating that it is proved.
+The proof obligation labelled TermBase, however, turns out to be falsifiable. Indeed, the premise does not guarantee `b >= 0`!
 
-![](../images/tutorial/tutorial02.jpg)
+![](../images/tutorial/tutorial03.jpg)
 
-A comment block having the key is added to the program file,
-where you are supposed to fill in a proof of that property.
-A program is proven correct if all proof obligations are proved.
-Hash key of a proof obligation with a proof block is displayed in blue
-(see the top-right corner).
-Currently the system makes no attempt to check these proofs, however.
-They are just comments for the user.
-
-Once we start doing the proofs, it immediately turns out that we cannot prove the second obligation --- the premise does not guarantee `b ≥ 0`!
 We thus realise that we need a stronger invariant.
 The new invariant would be
 ```
 a * b + r = A * B  ∧  b ≥ 0
 ```
 Update your code accordingly.
+You will see that the proof obligations and the specs are updated accordingly.
 
 ## Constructing the Loop Body
 
@@ -126,7 +127,7 @@ Let us try the second way. Type this into the spec and press `ctrl-c-r`:
 b := b / 2
 ```
 That gives you a new spec with updated postcondition:
-![](../images/tutorial/tutorial03.jpg)
+![](../images/tutorial/tutorial04.jpg)
 
 We now have to come up with some code that brings the computer from a state satisfying
 ```
@@ -138,16 +139,16 @@ to a state satisfying
 ```
 One possibility is `b := b * 2`. However, if we fill in `b := b * 2` to the spec:
 
-![](../images/tutorial/tutorial04.jpg)
+![](../images/tutorial/tutorial05.jpg)
 
 Among the proof obligations we have to prove:
 ```
-(a * b) + r = A * B ∧ b ≥ 0 ∧ b = ?bnd_0 ∧ b ≠ 0 ⇒ (b * 2) / 2 < ?bnd_0
+(a * b) + r = A * B ∧ b ≥ 0 ∧ b = ?bnd_51 ∧ b ≠ 0 ⇒ (b * 2) / 2 < ?bnd_51
 ```
-where `?bnd_0` is a system generated variable.
+where `?bnd_51` is a system generated variable.
 It looks complex but the relevant parts are:
 ```
-.... b = ?bnd_0 ... ⇒ (b * 2) / 2 < ?bnd_0
+.... b = ?bnd_51 ... ⇒ (b * 2) / 2 < ?bnd_15
 ```
 which is not possible to prove.
 Therefore `b := b * 2` is a bad idea.
@@ -157,9 +158,18 @@ Another possibility is `a := a * 2`. For that we have to prove an proof obligati
 (a * b) + r = A * B ....  ⇒
 ((a * 2) * (b / 2)) + r = A * B ....
 ```
-which is true *if `b` is an even number*.
+This time we demonstrate a manual proof.
+Each proof obligation comes with a hash key.
+Press the hash key for the first proof obligation, a comment block having the key is added to the program file,
+where you are supposed to fill in a proof of that property.
+Let us try to do the proof:
+
+![](../images/tutorial/tutorial06.jpg)
+
+It turns out that the property is true *if `b` is an even number*.
 This is a hint that we shall wrap `a := a * 2; b := b / 2` in a guard `even b`,
 to ensure that `b` is even, and put it in an `if` construct.
+
 
 The current code is now:
 ```
@@ -177,6 +187,12 @@ do b ≠ 0 ->
 od
 { r = A * B }
 ```
+
+A program is proven correct if all proof obligations are proved.
+Hash key of a proof obligation with a proof block is displayed in blue
+(see the top-right corner).
+Currently the system makes no attempt to check these proofs, however.
+They are just comments for the user.
 
 ## Totalising IF
 

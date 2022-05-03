@@ -124,24 +124,25 @@
       <div class="container content">
           <div class="page">
   <h1 class="page-title">Tutorial</h1>
-     <p><small><strong>Disclaimer</strong> This is a quick tutorial on interacting with the Guabao environment. We will give a quick grasp of the program derivation methodology that Guabao supports. However, this is certainly not a sufficient introduction to the methodology itself. For that we refer the readers to materials in the <a href="pages/4-references.html">References</a>.</small></p>
+     <p><small><strong>Disclaimer</strong> This is a quick tutorial on interacting with the Guabao environment. We will give a quick grasp of the program derivation methodology that Guabao supports. However, this is certainly not a sufficient introduction to the methodology itself. For that we refer the readers to materials in the <a href="4-references.html">References</a>.</small></p>
 <h2 id="installation">Installation</h2>
 <p>To install Guabao you must have <a href="https://code.visualstudio.com/">Visual Code Studio</a>. You can install Guabao by searching for the extension “Guabao” in the editor, or through the <a href="https://marketplace.visualstudio.com/items?itemName=scmlab.guabao">Extensions Marketplace</a>. A one-click installation downloads the frontend as well as pre-compiled backend.</p>
+<p><a href="https://github.com/Z3Prover/z3">Z3</a> has to be installed separately and locatable from <code>$PATH</code>. You do not need Z3 to run Guabao if you do not use the SMT-solving feature.</p>
 <h2 id="activation">Activation</h2>
 <p>Once the extension is installed, activate Guabao by creating a new file and saving it with extension <code>.gcl</code> (for Guarded Command Language). Guabao uses a variation of <a href="https://en.wikipedia.org/wiki/Guarded_Command_Language">Guarded Command Language</a>. We will introduce the language as we go in this tutorial. See <a href="1-gcl-overview.html">Language Overview</a> for a more complete summary.</p>
-<p>Shown below is an incomplete GCL program which we will use as our running example. We declare two constants <code>A</code> and <code>B</code>, about them all we know is that they are both non-negative (as asserted in <code>{ A ≥ 0 ∧ B ≥ 0 }</code> — assertions are enclosed in curly brackets), and constant functions <code>even</code> and <code>odd</code>, which we will use later. Also declared are three variables <code>r</code>, <code>a</code>, and <code>b</code>, all of them having type <code>Int</code>. The goal of the program is to store the value of <code>A * B</code> in variable <code>r</code>, as stated in the postcondition <code>{ r = A * B }</code>.</p>
-<pre><code>con A, B : Int { A ≥ 0 ∧ B ≥ 0 }
+<p>Shown below is an incomplete GCL program which we will use as our running example. We declare two constants <code>A</code> and <code>B</code>, about them all we know is that <code>B</code> is non-negative (as asserted in <code>{ B ≥ 0 }</code> — assertions are enclosed in curly brackets), and constant functions <code>even</code> and <code>odd</code>, which we will use later. Also declared are three variables <code>r</code>, <code>a</code>, and <code>b</code>, all of them having type <code>Int</code>. The goal of the program is to store the value of <code>A * B</code> in variable <code>r</code>, as stated in the postcondition <code>{ r = A * B }</code>.</p>
+<pre><code>con A, B : Int { B ≥ 0 }
 con even, odd : Int -&gt; Bool
-var r, a, b : Int
+var r : Int
 
 ?
 { r = A * B }</code></pre>
 <p>Copy and paste the code into the editor, save it as a file having extension <code>.gcl</code>, and you should see a screen similar to the screen shot below.</p>
 <p><img src="../images/tutorial/tutorial00.jpg" /></p>
-<p>The question mark <code>?</code> has been extended to a <em>spec</em> — a hole in the program to be filled in. To complete the program we are supposed in fill in a piece of code that brings the state of the system from precondition <code>True</code> to postcondition <code>r = A * B</code>. What we know about global constants (namely <code>A ≥ 0 ∧ B ≥ 0</code>) are universally true, and therefore displayed in a separate pane.</p>
+<p>The question mark <code>?</code> has been extended to a <em>spec</em> — a hole in the program to be filled in. To complete the program we are supposed in fill in a piece of code that brings the state of the system from precondition <code>True</code> to postcondition <code>r = A * B</code>. What we know about global constants (namely <code>B ≥ 0</code>) are universally true, and therefore displayed in a separate pane.</p>
 <p>We will attempt to complete the task, but the arithmetic operations we use are limited to addition, subtraction, multiplication and division by 2, and <code>even</code> and <code>odd</code>. This is a common exercise, and was once a useful one for early microcomputers, which did not have an atomic instruction for general multiplication (multiplication by 2 involves only bit-shifting and is much cheaper).</p>
 <h2 id="introducing-a-loop">Introducing a Loop</h2>
-<p>We will need at least a loop for such a non-trivial task, and <em>each loop must have an invariant and a bound</em>. Various techniques were developed to construct candidates of loop invariants from the postcondition. We cannot cover them here and refer the readers to the <a href="pages/4-references.html">References</a> page. For this problem,</p>
+<p>We will need at least a loop for such a non-trivial task, and <em>each loop must have an invariant and a bound</em>. Various techniques were developed to construct candidates of loop invariants from the postcondition. We cannot cover them here and refer the readers to the <a href="4-references.html">References</a> page. For this problem,</p>
 <pre><code>a * b + r = A * B</code></pre>
 <p>is a loop invariant that might work, with bound <code>b</code>.</p>
 <p>Copy and paste or type the following code into the spec. To type unicode characters, press ‘\’ and follow the hints in the drop-down menu.</p>
@@ -150,48 +151,46 @@ var r, a, b : Int
 do b ≠ 0 -&gt;
     ?
 od</code></pre>
-<p>In the code we initialize the variables <code>a, b, r</code> to satisfy the loop invariant. The guard of the loop is <code>b ≠ 0</code>. The body of the loop is yet to be constructed. When the cursor is in the spec, press <code>ctrl-c-r</code> to fill in the spec. You shall see something similar to the screen shot below:</p>
-<p><img src="../images/tutorial/tutorial01.jpg" /></p>
+<p>In the code we initialize the variables <code>a, b, r</code> to satisfy the loop invariant. The guard of the loop is <code>b ≠ 0</code>. The body of the loop is yet to be constructed.</p>
+<p>Your current screen may look like: <img src="../images/tutorial/tutorial01.jpg" /></p>
+<p>When the cursor is in the spec, press <code>ctrl-c-r</code> to fill in the spec. You shall see something similar to the screen shot below:</p>
+<p><img src="../images/tutorial/tutorial02.jpg" /></p>
 <h2 id="the-interface">The Interface</h2>
 <p>Taking a look at the interface:</p>
-<p>The program is in the left pane. The right pane contains information including</p>
-<ul>
-<li>inferred verification conditions (only those on the path of the current location of the cursor are displayed),</li>
-<li>pre and postconditions of <em>specs</em> (holes missing code),</li>
-<li>global properties, etc.</li>
-</ul>
-<p>A yellow wavy line indicates “there are verification conditions incurred here.” In the screen shoot, the cursor is on line 7, beginning of the loop, and the right pane shows, among other proof obligations,</p>
-<pre><code>(a * b) + r = A * B ∧ ¬ b ≠ 0   ⇒   r = A * B</code></pre>
-<p>that is, the invariant and the negation of the guard guarantee the postcondition, and</p>
-<pre><code>(a * b) + r = A * B ∧ b ≠ 0   ⇒   b ≥ 0</code></pre>
-<p>that is, the bound <code>b</code> is non-negative as long as the loop is still running.</p>
-<p>Move the cursor to other yellow wavy lines to see other proof obligations.</p>
-<p>Each proof obligation comes with a hash key. Press the hash key for the first proof obligation, for example:</p>
-<p><img src="../images/tutorial/tutorial02.jpg" /></p>
-<p>A comment block having the key is added to the program file, where you are supposed to fill in a proof of that property. A program is proven correct if all proof obligations are proved. Hash key of a proof obligation with a proof block is displayed in blue (see the top-right corner). Currently the system makes no attempt to check these proofs, however. They are just comments for the user.</p>
-<p>Once we start doing the proofs, it immediately turns out that we cannot prove the second obligation — the premise does not guarantee <code>b ≥ 0</code>! We thus realise that we need a stronger invariant. The new invariant would be</p>
+<p>The program is in the left pane. In the program in the left pane, blue shade in the code indicates ``there are proof obligations incurred here.’’ Program locations associated with more POs get thicker shades.</p>
+<p>The right pane contains information including * inferred proof obligations (only those on the path of the current location of the cursor are displayed), * pre/postconditions of <em>specs</em> (holes missing code), * global properties, etc.</p>
+<p>Since the number of proof obligations can be large, in the right pane we display those on the path of the current location of the cursor. In the screen shoot, the right pane shows, among other proof obligations,</p>
+<pre><code>(a * b) + r = A * B ∧ ¬ b ≠ 0   ⇒   r = A * B
+(a * b) + r = A * B ∧ b ≠ 0   ⇒   b ≥ 0</code></pre>
+<p>The first is proof obligation is labelled “InvBase”. It says that the invariant and the negation of the guard guarantee the postcondition. The second, labelled “TermBase”, says that the bound <code>b</code> is non-negative as long as the loop is still running.</p>
+<p>Move the cursor around to see other proof obligations.</p>
+<p>The proof obligation InvBase is trivial to prove — in fact, the invariant and the bound were designed to make it trivial. At the top of the box displaying this PO there is a icons of a magic wand. Clicking on it invokes the SMT solver Z3, which generates the output “Q.E.D.”, indicating that it is proved. The proof obligation labelled TermBase, however, turns out to be falsifiable. Indeed, the premise does not guarantee <code>b &gt;= 0</code>!</p>
+<p><img src="../images/tutorial/tutorial03.jpg" /></p>
+<p>We thus realise that we need a stronger invariant. The new invariant would be</p>
 <pre><code>a * b + r = A * B  ∧  b ≥ 0</code></pre>
-<p>Update your code accordingly.</p>
+<p>Update your code accordingly. You will see that the proof obligations and the specs are updated accordingly.</p>
 <h2 id="constructing-the-loop-body">Constructing the Loop Body</h2>
 <p>Now we attempt to construct the loop body. To have a loop that terminates we have to decrease the bound, and there are various ways to do so. One may decrement <code>b</code> by <code>b := b - 1</code>, or one may divide <code>b</code> by half — knowing that <code>b</code> is not zero. Let us try the second way. Type this into the spec and press <code>ctrl-c-r</code>:</p>
 <pre><code>?
 b := b / 2</code></pre>
-<p>That gives you a new spec with updated postcondition: <img src="../images/tutorial/tutorial03.jpg" /></p>
+<p>That gives you a new spec with updated postcondition: <img src="../images/tutorial/tutorial04.jpg" /></p>
 <p>We now have to come up with some code that brings the computer from a state satisfying</p>
 <pre><code>(a * b) + r = A * B ∧ b ≥ 0 ∧ b ≠ 0</code></pre>
 <p>to a state satisfying</p>
 <pre><code>(a * (b / 2)) + r = A * B ∧ b / 2 ≥ 0</code></pre>
 <p>One possibility is <code>b := b * 2</code>. However, if we fill in <code>b := b * 2</code> to the spec:</p>
-<p><img src="../images/tutorial/tutorial04.jpg" /></p>
+<p><img src="../images/tutorial/tutorial05.jpg" /></p>
 <p>Among the proof obligations we have to prove:</p>
-<pre><code>(a * b) + r = A * B ∧ b ≥ 0 ∧ b = ?bnd_0 ∧ b ≠ 0 ⇒ (b * 2) / 2 &lt; ?bnd_0</code></pre>
-<p>where <code>?bnd_0</code> is a system generated variable. It looks complex but the relevant parts are:</p>
-<pre><code>.... b = ?bnd_0 ... ⇒ (b * 2) / 2 &lt; ?bnd_0</code></pre>
+<pre><code>(a * b) + r = A * B ∧ b ≥ 0 ∧ b = ?bnd_51 ∧ b ≠ 0 ⇒ (b * 2) / 2 &lt; ?bnd_51</code></pre>
+<p>where <code>?bnd_51</code> is a system generated variable. It looks complex but the relevant parts are:</p>
+<pre><code>.... b = ?bnd_51 ... ⇒ (b * 2) / 2 &lt; ?bnd_15</code></pre>
 <p>which is not possible to prove. Therefore <code>b := b * 2</code> is a bad idea.</p>
 <p>Another possibility is <code>a := a * 2</code>. For that we have to prove an proof obligation, which simplifies to</p>
 <pre><code>(a * b) + r = A * B ....  ⇒
 ((a * 2) * (b / 2)) + r = A * B ....</code></pre>
-<p>which is true <em>if <code>b</code> is an even number</em>. This is a hint that we shall wrap <code>a := a * 2; b := b / 2</code> in a guard <code>even b</code>, to ensure that <code>b</code> is even, and put it in an <code>if</code> construct.</p>
+<p>This time we demonstrate a manual proof. Each proof obligation comes with a hash key. Press the hash key for the first proof obligation, a comment block having the key is added to the program file, where you are supposed to fill in a proof of that property. Let us try to do the proof:</p>
+<p><img src="../images/tutorial/tutorial06.jpg" /></p>
+<p>It turns out that the property is true <em>if <code>b</code> is an even number</em>. This is a hint that we shall wrap <code>a := a * 2; b := b / 2</code> in a guard <code>even b</code>, to ensure that <code>b</code> is even, and put it in an <code>if</code> construct.</p>
 <p>The current code is now:</p>
 <pre><code>con A, B : Int { A ≥ 0 ∧ B ≥ 0 }
 con even, odd : Int -&gt; Bool
@@ -206,6 +205,7 @@ do b ≠ 0 -&gt;
     fi
 od
 { r = A * B }</code></pre>
+<p>A program is proven correct if all proof obligations are proved. Hash key of a proof obligation with a proof block is displayed in blue (see the top-right corner). Currently the system makes no attempt to check these proofs, however. They are just comments for the user.</p>
 <h2 id="totalising-if">Totalising IF</h2>
 <p>We are not done yet. Among all the proof obligations we will be asked to prove that <code>if</code> is total — every possible case is covered. Therefore we need to think about what to do in the <code>odd b</code> case. For this case we might decrease <code>b</code> by <code>b := b - 1</code>. By a similar process we can construct what to do with <code>a</code> and <code>r</code> in this case to maintain the invariant. A possible final program would be:</p>
 <pre><code>con A, B : Int { A ≥ 0 ∧ B ≥ 0 }
