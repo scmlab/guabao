@@ -38,7 +38,7 @@ It might also help to clarify what Guabao is not:
 The frontend of Guabao is an extension of [Visual Code Studio](https://code.visualstudio.com/). You can install it by searching for the extension "Guabao" in the editor, or through the [Extensions Marketplace](https://marketplace.visualstudio.com/items?itemName=scmlab.guabao).
 A simple one-click installation downloads the frontend as well as pre-compiled backend (implemented in Haskell).
 
-[Z3](https://github.com/Z3Prover/z3) has to be installed separately and locatable from `$PATH`. You do not need Z3 to run Guabao if you do not use this feature, however.
+[Z3](https://github.com/Z3Prover/z3) has to be installed separately and locatable from `$PATH`. You do not need Z3 to run Guabao if you do not use the SMT-solving feature.
 
 # Where to Start?
 
