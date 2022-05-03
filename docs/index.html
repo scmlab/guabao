@@ -133,16 +133,33 @@
 <p>As the program is being written in the left pane, Guabao instantly parses the program, infers, and displays in the right pane verification conditions yet to be proved to show that the program meets the postcondition.</p>
 <p>Code yet-to-be-written can be left as holes (specifications with pre and post consditions) to be filled in later, for example the hole between line 8 and 10. Attempts to prove verification conditions may give clues how the holes can be filled or, in case of failure, indicate that we need a stronger precondition or loop invariant.</p>
 <p>See the <a href="pages/0-tutorial.html">tutorial</a> for more explanations.</p>
-<p>Guabao currently does not prove anything for the users. It is possible, in the future, to employ an external theorem prover to do the job.</p>
 <p><strong>The Name</strong>. GUA in Guabao comes from GUArded command language. <a href="https://en.wikipedia.org/wiki/Gua_bao">Guabao (刈包)</a> is a street food popular in places including Taiwan, where Guabao the software was designed.</p>
+<h1 id="what-guabao-is-not">What Guabao is Not</h1>
+<p>It might also help to clarify what Guabao is not:</p>
+<ul>
+<li>Gaubao is not an implementation of Guarded Command Language in which one can write a program and test it, but an environment where a program and its proof can be designed together. <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
+<li>While Guabao Guabao does employ an SMT solver (currently <a href="https://github.com/Z3Prover/z3">Z3</a>) to discharge simple proof obligations, it does not intend to prove <em>everything</em> for the user. Instead, it computes the proof obligations needed to guarantee correctness, and let them guide the development of the program.
+<ul>
+<li>We believe that proving properties that are related to the algorithmic aspect of a program and, in case of failure, learning from the proof how the program should evolve to allow the proof to go through, is a part of the program development process (see the <a href="pages/0-tutorial.html">tutorial</a>), which should be carried out by the user.</li>
+</ul></li>
+<li>Currently Guabao does not check user-written proofs. To do so we need to develop a representation of equational proofs, which is one of our future works.</li>
+</ul>
 <h1 id="download-and-install">Download and Install</h1>
 <p>The frontend of Guabao is an extension of <a href="https://code.visualstudio.com/">Visual Code Studio</a>. You can install it by searching for the extension “Guabao” in the editor, or through the <a href="https://marketplace.visualstudio.com/items?itemName=scmlab.guabao">Extensions Marketplace</a>. A simple one-click installation downloads the frontend as well as pre-compiled backend (implemented in Haskell).</p>
+<p><a href="https://github.com/Z3Prover/z3">Z3</a> has to be installed separately and locatable from <code>$PATH</code>. You do not need Z3 to run Guabao if you do not use this feature, however.</p>
 <h1 id="where-to-start">Where to Start?</h1>
 <p>More information can be found in the <a href="pages/0-tutorial.html">tutorial</a>, the <a href="pages/1-gcl-overview.html">Language Overview</a>, and the <a href="pages/2-examples.html">Examples</a> page.</p>
+<h1 id="development-team">Development Team</h1>
+<p><a href="https://scm.iis.sinica.edu.tw/home/">Shin-Cheng Mu</a>, Ting-Yan Lai, Thing-Han Lim, Chien-Yuan Su (<a href="https://www.iis.sinica.edu.tw/">Institute of Information Science</a>, Academia Sinica, Taiwan.), and Hsien-En Tzeng (National Taiwan University).</p>
 <h1 id="more-info.">More Info.</h1>
-<p>Guabao is implemented and maintained by <a href="https://scm.iis.sinica.edu.tw/home/">Shin-Cheng Mu</a>, Ting-Yan Lai, and Thing-Han Lim in <a href="https://www.iis.sinica.edu.tw/">Institute of Information Science</a>, Academia Sinica, Taiwan.</p>
-<p>The backend of Guabao is implemented using <a href="https://www.haskell.org/">Haskell</a>, while the frontend is implemented using <a href="https://reasonml.github.io/">Reason</a> and compiled to Javascript to run as a VS Code extension. Source code for the <a href="https://github.com/scmlab/gcl-vscode">frontend</a> and <a href="https://github.com/scmlab/gcl">backend</a> are stored on GitHub.</p>
+<p>The backend of Guabao is implemented using <a href="https://www.haskell.org/">Haskell</a>, while the frontend is implemented using <a href="https://reasonml.github.io/">Reason</a> and compiled to Javascript to run as a VS Code extension. Source code of Guabao is stored on GitHub (frontend: <a href="https://github.com/scmlab/gcl-vscode">https://github.com/scmlab/gcl-vscode</a>, backend: <a href="https://github.com/scmlab/gcl">https://github.com/scmlab/gcl</a>).</p>
 <p>Guabao is still under development — everything may change or break tomorrow! We welcome bug reports, feature requests, and other suggestions. Feel free to submit them as issues through the GitHub repositories above, or <a href="pages/3-contacts.html">contact</a> the authors.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>In his article <a href="https://www.cs.utexas.edu/~EWD/transcriptions/EWD10xx/EWD1036.html">“On the cruelty of really teaching computing science” (EWD1036)</a>, Dijkstra wrote that he would design a programming language for teaching (which we believe would be GCL) and ``see to it that [it] has not been implemented on campus so that students are protected from the temptation to test their programs.’’<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 </div>
 
       </div>
