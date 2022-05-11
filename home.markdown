@@ -7,6 +7,8 @@ title: Guabao
 Guabao is a programming environment encouraging the methodology that **a program and its correctness proof should be developed hand in hand**,
 and that **how a program should be proved could sometimes give hints how the program can be written**.
 
+(**Note**: in the current release of Guabao, the SMT feature runs only in development mode. See the [note below](#smt-devel).)
+
 Guabao uses a variation of Edsger W. Dijkstra's [Guarded Command Language](https://en.wikipedia.org/wiki/Guarded_Command_Language) --- see the [language overview](pages/1-gcl-overview.html).
 However, Guabao is also an environment built into an editor.
 Shown below is a screen shot:
@@ -15,7 +17,7 @@ Shown below is a screen shot:
 
 As the program is being written in the left pane, Guabao instantly parses the program, infers, and displays in the right pane proof obligations yet to be proved to show that the program meets the postcondition.
 
-Code yet-to-be-written can be left as holes (specifications with pre and post consditions) to be filled in later, for example the hole between line 8 -- 10. Attempts to prove the proof obligations may give clues how the holes can be filled or, in case of failure, indicate that we need a stronger precondition or loop invariant.
+Code yet-to-be-written can be left as holes (specifications with pre and post conditions) to be filled in later, for example the hole between line 8 -- 10. Attempts to prove the proof obligations may give clues how the holes can be filled or, in case of failure, indicate that we need a stronger precondition or loop invariant.
 
 See the [tutorial](pages/0-tutorial.html) for more explanations.
 
@@ -55,3 +57,12 @@ Source code of Guabao is stored on GitHub (frontend: [https://github.com/scmlab/
 
 Guabao is still under development --- everything may change or break tomorrow! We welcome bug reports, feature requests, and other suggestions.
 Feel free to submit them as issues through the GitHub repositories above, or [contact](pages/3-contacts.html) the authors.
+
+## SMT in Development Mode
+<a name="smt-devel"></a>
+
+In the current version of Guabao, the SMT feature runs only in development mode. To manually activate development mode, please execute “%[the path to gcl binary] -d” in terminal, then restart Guabao (`ctrl+shift+r`). If the top right corner shows “TCP” instead of “Prebuilt”, then you have successfully activated development mode.
+
+Every other functionality works as well under development mode. To turn off the development mode, please press `ctrl+c` in the terminal to terminate the program, and restart Guabao again.
+
+We will try to fix this soon.

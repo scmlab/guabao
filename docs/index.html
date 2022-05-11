@@ -128,10 +128,11 @@
 <img src="images/guabao-saucesupreme.jpg" alt="Photo: Ron Dollete. CC BY-ND 2.0." /><figcaption aria-hidden="true"><small>Photo: <a href="https://www.flickr.com/photos/saucesupreme/4434798368">Ron Dollete</a>. CC BY-ND 2.0.</small></figcaption>
 </figure>
 <p>Guabao is a programming environment encouraging the methodology that <strong>a program and its correctness proof should be developed hand in hand</strong>, and that <strong>how a program should be proved could sometimes give hints how the program can be written</strong>.</p>
+<p>(<strong>Note</strong>: in the current release of Guabao, the SMT feature runs only in development mode. See the <a href="#smt-devel">note below</a>.)</p>
 <p>Guabao uses a variation of Edsger W. Dijkstra’s <a href="https://en.wikipedia.org/wiki/Guarded_Command_Language">Guarded Command Language</a> — see the <a href="pages/1-gcl-overview.html">language overview</a>. However, Guabao is also an environment built into an editor. Shown below is a screen shot:</p>
 <p><img src="images/tutorial/tutorial04.jpg" /></p>
 <p>As the program is being written in the left pane, Guabao instantly parses the program, infers, and displays in the right pane proof obligations yet to be proved to show that the program meets the postcondition.</p>
-<p>Code yet-to-be-written can be left as holes (specifications with pre and post consditions) to be filled in later, for example the hole between line 8 – 10. Attempts to prove the proof obligations may give clues how the holes can be filled or, in case of failure, indicate that we need a stronger precondition or loop invariant.</p>
+<p>Code yet-to-be-written can be left as holes (specifications with pre and post conditions) to be filled in later, for example the hole between line 8 – 10. Attempts to prove the proof obligations may give clues how the holes can be filled or, in case of failure, indicate that we need a stronger precondition or loop invariant.</p>
 <p>See the <a href="pages/0-tutorial.html">tutorial</a> for more explanations.</p>
 <p><strong>The Name</strong>. GUA in Guabao comes from GUArded command language. <a href="https://en.wikipedia.org/wiki/Gua_bao">Guabao (刈包)</a> is a street food popular in places including Taiwan, where Guabao the software was designed.</p>
 <h1 id="what-guabao-is-not">What Guabao is Not</h1>
@@ -154,6 +155,11 @@
 <h1 id="more-info.">More Info.</h1>
 <p>The backend of Guabao is implemented using <a href="https://www.haskell.org/">Haskell</a>, while the frontend is implemented using <a href="https://reasonml.github.io/">Reason</a> and compiled to Javascript to run as a VS Code extension. Source code of Guabao is stored on GitHub (frontend: <a href="https://github.com/scmlab/gcl-vscode">https://github.com/scmlab/gcl-vscode</a>, backend: <a href="https://github.com/scmlab/gcl">https://github.com/scmlab/gcl</a>).</p>
 <p>Guabao is still under development — everything may change or break tomorrow! We welcome bug reports, feature requests, and other suggestions. Feel free to submit them as issues through the GitHub repositories above, or <a href="pages/3-contacts.html">contact</a> the authors.</p>
+<h2 id="smt-in-development-mode">SMT in Development Mode</h2>
+<p><a name="smt-devel"></a></p>
+<p>In the current version of Guabao, the SMT feature runs only in development mode. To manually activate development mode, please execute “%[the path to gcl binary] -d” in terminal, then restart Guabao (<code>ctrl+shift+r</code>). If the top right corner shows “TCP” instead of “Prebuilt”, then you have successfully activated development mode.</p>
+<p>Every other functionality works as well under development mode. To turn off the development mode, please press <code>ctrl+c</code> in the terminal to terminate the program, and restart Guabao again.</p>
+<p>We will try to fix this soon.</p>
 <section class="footnotes" role="doc-endnotes">
 <hr />
 <ol>

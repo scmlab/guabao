@@ -9,3 +9,10 @@ Issues regarding the homepage itself can be reported here.
 Source code of Guabao has its own [GIT repository](https://github.com/scmlab/gcl). Issues regarding Guabao can be reported there.
 
 This homepage is based on [Lanyon-Haskell](https://github.com/hahey/lanyon-hakyll).
+
+
+## Links
+
+* Guabao Homepage: https://scmlab.github.io/guabao/
+* Frontend Code Repository: https://github.com/scmlab/gcl-vscode
+* Backend Code Repository: https://github.com/scmlab/gcl
