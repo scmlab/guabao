@@ -79,11 +79,15 @@
       
     
       
-        <a class="sidebar-nav-item" href="https://scmlab.github.io/guabao/pages/3-contacts.html">Contacts</a>
+        <a class="sidebar-nav-item" href="https://scmlab.github.io/guabao/pages/3-keyscombs.html">Key Combinations</a>
       
     
       
-        <a class="sidebar-nav-item" href="https://scmlab.github.io/guabao/pages/4-references.html">References</a>
+        <a class="sidebar-nav-item" href="https://scmlab.github.io/guabao/pages/4-contacts.html">Contacts</a>
+      
+    
+      
+        <a class="sidebar-nav-item" href="https://scmlab.github.io/guabao/pages/5-references.html">References</a>
       
     
 
@@ -124,7 +128,7 @@
       <div class="container content">
           <div class="page">
   <h1 class="page-title">Guarded Command Language Overview</h1>
-     <p>Guabao uses a variation of Guarded Command Language based on that in <a href="4-references.html">Anne Kaldewaij’s book</a>, with slight variation in syntax.</p>
+     <p>Guabao uses a variation of Guarded Command Language based on that in <a href="5-references.html">Anne Kaldewaij’s book</a>, with slight variation in syntax.</p>
 <p>As a running example, the following program computes the greatest common divisor (<code>gcd</code>) of constants <code>A</code> and <code>B</code> and stores it in <code>r</code>, using what is perhaps one of the oldest algorithm.</p>
 <pre><code>con A, B : Int { A &gt; 0 ∧ B &gt; 0}
 con gcd : Int -&gt; Int -&gt; Int
@@ -155,6 +159,17 @@ var x, y : Int</code></pre>
 <p>The type of arrays is denoted by <code>array interval of type</code>, where <code>interval</code> can be either opened or closed on both ends, and may refer to declared constants. In the example below we declared a constant <code>N</code>, about which all we know is that it is non-negative, and an array of <code>Int</code> whose elements may include <code>f[0]</code> but not <code>f[N]</code>.</p>
 <pre><code>con N : Int { N ≥ 0 }
 con f : array [0..N) of Int</code></pre>
+<h1 id="declarative-sublanguage">Declarative Sublanguage</h1>
+<p>Guabao embeds a small declarative language, in which one can define constants and functions to be used in assertions. In the future we will allow datatype definitions here, and eventually extend it to a more complete functional language.</p>
+<p>Currently this language resides in blocks delimited by <code>{: ... :}</code>:</p>
+<pre><code>{:
+   even : Int -&gt; Int
+   odd  : Int -&gt; Int
+
+   P = ⟨ ∀ i : 0 ≤ i &lt; n : even F[i] ⟩
+   sum n = ⟨ ∀ i : 0 ≤ i &lt; n : F[i] ⟩
+:}</code></pre>
+<p>In the code fragment above we declare two functions <code>even</code> and <code>odd</code>, which can be used in assertions later. Their definitions are not given. In constrast, <code>P</code> and <code>sum</code> are fully defined. Note that <code>P</code> refers to a free variable <code>n</code>, which must be declared already, while <code>sum</code> is a function taking an argument <code>n</code>. Simple Hindley-Milner type inference applies to this language, therefore types of <code>P</code> and <code>sum</code> need not be given.</p>
 <h1 id="statements">Statements</h1>
 <h2 id="assertions">Assertions</h2>
 <p>Assertions are <code>Bool</code>-valued expressions written in curly brackets. For example,</p>
@@ -201,6 +216,7 @@ od</code></pre>
 <li>Logical operators: <code>¬, ∧, ∨, ⇒</code>. One may also wrote <code>&amp;&amp;</code> and <code>||</code> for conjunction and disjunction.</li>
 </ul>
 <p>Regarding quantification, we use the Eindhoven notation, e.g. <code>⟨ Σ k : i ≤ k &lt; j : f[k] ⟩</code>.</p>
+<p>A list of key combinations to for inputting unicode characters can be found <a href="3-keyscombs.html">here</a>.</p>
 <h1 id="comments">Comments</h1>
 <p>We currently allow two style of comments:</p>
 <pre><code>-- single line comments, and

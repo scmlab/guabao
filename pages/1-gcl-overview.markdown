@@ -2,7 +2,7 @@
 title: Guarded Command Language Overview
 ---
 
-Guabao uses a variation of Guarded Command Language based on that in [Anne Kaldewaij's book](4-references.html), with slight variation in syntax.
+Guabao uses a variation of Guarded Command Language based on that in [Anne Kaldewaij's book](5-references.html), with slight variation in syntax.
 
 As a running example, the following program computes the greatest common divisor (`gcd`) of constants `A` and `B` and stores it in `r`, using what is perhaps one of the oldest algorithm.
 
@@ -50,6 +50,27 @@ In the example below we declared a constant `N`, about which all we know is that
 con N : Int { N ≥ 0 }
 con f : array [0..N) of Int
 ```
+
+# Declarative Sublanguage
+
+Guabao embeds a small declarative language, in which one can define constants and functions to be used in assertions. In the future we will allow datatype definitions here, and eventually extend it to a more complete functional language.
+
+Currently this language resides in blocks delimited by `{: ... :}`:
+
+```
+{:
+   even : Int -> Int
+   odd  : Int -> Int
+
+   P = ⟨ ∀ i : 0 ≤ i < n : even F[i] ⟩
+   sum n = ⟨ ∀ i : 0 ≤ i < n : F[i] ⟩
+:}
+```
+
+In the code fragment above we declare two functions `even` and `odd`, which can be used in assertions later. Their definitions are not given.
+In constrast, `P` and `sum` are fully defined. Note that `P` refers to a free variable `n`, which must be declared already, while `sum` is a function taking an argument `n`.
+Simple Hindley-Milner type inference applies to this language, therefore types of `P` and `sum` need not be given.
+
 
 # Statements
 
@@ -143,6 +164,8 @@ We currently support
 * Logical operators: `¬, ∧, ∨, ⇒`. One may also wrote `&&` and `||` for conjunction and disjunction.
 
 Regarding quantification, we use the Eindhoven notation, e.g. `⟨ Σ k : i ≤ k < j : f[k] ⟩`.
+
+A list of key combinations to for inputting unicode characters can be found [here](3-keyscombs.html).
 
 # Comments
 

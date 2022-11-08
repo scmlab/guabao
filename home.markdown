@@ -48,7 +48,7 @@ More information can be found in the [tutorial](pages/0-tutorial.html), the [Lan
 
 # Development Team
 
-[Shin-Cheng Mu](https://scm.iis.sinica.edu.tw/home/), Ting-Yan Lai, Thing-Han Lim, Chien-Yuan Su ([Institute of Information Science](https://www.iis.sinica.edu.tw/), Academia Sinica, Taiwan.), and Hsien-En Tzeng (National Taiwan University).
+[Shin-Cheng Mu](https://scm.iis.sinica.edu.tw/home/), Ting-Yan Lai, Thing-Han Lim, Chien-Yuan Su ([Institute of Information Science](https://www.iis.sinica.edu.tw/), Academia Sinica, Taiwan), and Hsien-En Tzeng (National Taiwan University).
 
 # More Info.
 
@@ -56,7 +56,7 @@ The backend of Guabao is implemented using [Haskell](https://www.haskell.org/), 
 Source code of Guabao is stored on GitHub (frontend: [https://github.com/scmlab/gcl-vscode](https://github.com/scmlab/gcl-vscode), backend: [https://github.com/scmlab/gcl](https://github.com/scmlab/gcl)).
 
 Guabao is still under development --- everything may change or break tomorrow! We welcome bug reports, feature requests, and other suggestions.
-Feel free to submit them as issues through the GitHub repositories above, or [contact](pages/3-contacts.html) the authors.
+Feel free to submit them as issues through the GitHub repositories above, or [contact](pages/4-contacts.html) the authors.
 
 ## SMT in Development Mode
 <a name="smt-devel"></a>

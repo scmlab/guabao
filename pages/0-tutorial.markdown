@@ -5,7 +5,7 @@ title: Tutorial
 <small>**Disclaimer** This is a quick tutorial on interacting with the Guabao environment.
 We will give a quick grasp of the program derivation methodology that Guabao supports.
 However, this is certainly not a sufficient introduction to the methodology itself.
-For that we refer the readers to materials in the [References](4-references.html).</small>
+For that we refer the readers to materials in the [References](5-references.html).</small>
 
 ## Installation
 
@@ -50,7 +50,7 @@ We will attempt to complete the task, but the arithmetic operations we use are l
 
 We will need at least a loop for such a non-trivial task, and
 *each loop must have an invariant and a bound*.
-Various techniques were developed to construct candidates of loop invariants from the postcondition. We cannot cover them here and refer the readers to the [References](4-references.html) page.
+Various techniques were developed to construct candidates of loop invariants from the postcondition. We cannot cover them here and refer the readers to the [References](5-references.html) page.
 For this problem,
 ```
 a * b + r = A * B
@@ -58,7 +58,7 @@ a * b + r = A * B
 is a loop invariant that might work, with bound `b`.
 
 Copy and paste or type the following code into the spec.
-To type unicode characters, press '\\' and follow the hints in the drop-down menu.
+To type unicode characters, press '\\' and follow the hints in the drop-down menu. A list of key combinations to for inputting unicode characters can be found [here](3-keyscombs.html).
 ```
 a, b, r := A, B, 0
 { a * b + r = A * B, bnd: b }
@@ -257,7 +257,8 @@ It is this style of program development Guabao is designed to support .
 * `ctrl-c-r`: when the cursor is in a hole, pressing `ctrl-c-r` fills in the hole.
 * `ctrl-x-r`: restarts the Guabao backend.
 * A question mark `?` generates a new hole.
-* The language uses unicode characters in various occasions. Press `\` to input unicode characters used in this language.
+* The language uses unicode characters in various occasions. Press `\` to input unicode characters used in this language. A list of key combinations to for inputting unicode characters can be found [here](3-keyscombs.html).
+
 
 ## The Programming Language
 
