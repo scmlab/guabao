@@ -9,7 +9,7 @@ For that we refer the readers to materials in the [References](5-references.html
 
 ## Installation
 
-To install Guabao you must have [Visual Code Studio](https://code.visualstudio.com/). You can install Guabao by searching for the extension "Guabao" in the editor, or through the [Extensions Marketplace](https://marketplace.visualstudio.com/items?itemName=scmlab.guabao).
+To install Guabao you must have [Visual Studio Code](https://code.visualstudio.com/). You can install Guabao by searching for the extension "Guabao" in the editor, or through the [Extensions Marketplace](https://marketplace.visualstudio.com/items?itemName=scmlab.guabao).
 A one-click installation downloads the frontend as well as pre-compiled backend.
 
 [Z3](https://github.com/Z3Prover/z3) has to be installed separately and locatable from `$PATH`. You do not need Z3 to run Guabao if you do not use the SMT-solving feature.
